@@ -1,0 +1,155 @@
+/* Overall layout */
+
+body {
+    background: #D8DEC3;
+    color: #222222;
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    font-size: 14px;
+    margin: 0;
+    line-height: 1.2em;
+}
+
+section, footer {
+    background: #FAFDEC;
+    padding: 1em 2em;
+}
+
+header {
+    background: #D8DEC3;
+    padding: 1em 12px;
+}
+
+section#sec_input {
+    border-top: 3px solid #C8CEB3;
+}
+
+footer {
+    border-bottom: 3px solid #C8CEB3;
+}
+
+h1 {
+    color: #4A3D3D;
+    font-size: 38.8px;
+    display: block;
+    margin-bottom: 0;
+    width: auto;
+    line-height: 0.95em;
+}
+
+header h2 {
+    margin-bottom: 0;
+    margin-top: 0em;
+    font-size: 1em;
+    color: #4A3D3D;
+}
+
+span.highlight {
+    color: #2A1D1D;
+}
+
+
+/* Defaults: headings, colours etc */
+
+h2, h3, h4, h5 {
+    color: #4A3D3D;
+}
+
+h2 { font-size: 23.3px; }
+
+a:link { 
+    color: #4A3D3D;
+    text-decoration:none;    
+    border-bottom: 1px dotted rgba(2,2,2,0.9);
+}
+a:visited    {
+    color:#4A3D3D;
+}
+
+a:hover {
+    color:#4A3D3D;
+    text-decoration: none;
+    border-bottom: none;
+}
+a:active      {color:#4A3D3D;}
+
+ul {
+    margin-left: 0px;
+    margin-top: 0.4em;
+    margin-right:0.4em;
+    margin-bottom: 0.8em;
+    margin-left: 1.6em;
+    padding: 0px;
+}
+
+input {
+    display: inline-block;
+    padding: 2px;
+    border: 1px solid #4A3D3D;
+    border-radius: 5px;
+    color: #4A3D3D;
+}
+
+button {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 2px 4px;
+    background: #F2E9E6;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 3px;
+    transition: all 0.3s ease-out;
+    box-shadow: 0 0 2px 0px #4A3D3D;
+}
+
+button:hover {
+    background: #F8F0EC;
+}
+
+
+/* Visualization */
+
+table.vis {
+	padding: 0;
+}
+
+table.vis tr {
+	border: 1px solid #eeeeee;
+}
+
+table.vis td {
+	padding: 1px 2px 1px 0px;
+}
+
+table.vis td.playcount {
+	color: #8D8585;
+}
+
+span.album {
+	margin: 0px 2px;
+	padding: 0px 2px;
+	border: 1px solid #dddddd;
+	float: left;
+	width: 35px;
+}
+
+span.tonsof-listens { background: #F3F2F2; } 
+span.many-listens { background: #DDDADA; }
+span.some-listens { background: #C6C2C2; }
+span.few-listens { background: #D8DEC3; }
+span.no-listens { background: #BDE2AA; }
+
+
+/* Fine-tuning */
+
+#errormsg { color: #ee3333; }
+#infomsg { color: #333333; }
+
+.hide {
+    display: none;
+}
+
+canvas {
+    display: block; 
+    outline: 0px; 
+    margin-bottom: 1.5em; 
+    border: 2px solid #cccccc;
+}
