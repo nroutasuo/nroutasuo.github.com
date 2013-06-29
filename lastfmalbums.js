@@ -1,11 +1,20 @@
-var artistlimit = 25;
-var albumlimit = 15;
+
+/**
+* Last.fm album app by Noora Routasuo
+* Built with 
+* JavaScript Last.fm API (https://github.com/fxb/javascript-last.fm-api/)
+* D3.js (http://d3js.org/)
+*/
+
+var artistlimit = 30;
+var albumlimit = 25;
+var working = false;
 
 $(document).ready(function() {	
 	/* Create a cache object */
 	//var cache = new LastFMCache();
 	//alert(cache);
-	console.log("Document ready.");
+    window.setInterval(blink,600);
 });
 
 var apiKey = '7368f1aa0cd2d8defcba395eb5e9fd63';
@@ -16,10 +25,6 @@ var lastfm = new LastFM({
 	//cache     : cache
 });
 
-function testy(data) {
-	console.log("TEST FUNCTION REACHED");
-}
-
 var ok_artists;
 var artist_count;
 var userpercentage = 100/artistlimit*1;
@@ -27,26 +32,32 @@ var artistpercentage = 100/artistlimit*2;
 
 // Get initial data (top artists) from Last.fm according to the given username
 function fetchData() {
-	// Get username
-	var username = $("#username").val();
-	console.log("Fetching data for username " + username);
+    
+    // Clear up any previous chart
 	ok_artists = 0;
-	showError("");
-	showInfo(userpercentage + "% loaded");
+	showError("");    
+    $("#sec_vis").children().remove();
+    
+	// Get and check username
+	var username = $("#username").val();
+    if(username.length < 1) {
+        showInfo("Enter a Last.fm username.");
+        return;
+    }
 
 	// Load top artists
+    working = true;
 	var artist_count;
 	lastfm.user.getTopArtists(
-		{ user: username, limit: artistlimit, api_key: apiKey, callback: testy }, 
+		{ user: username, limit: artistlimit, api_key: apiKey }, 
 		{
 			success: function(data) {
-				console.log("Top artists fetched succesfully.");
-				showInfo((userpercentage+artistpercentage) + "% loaded");
+				showLoaded(userpercentage+artistpercentage);
 				showArtists(data.topartists, username);
 				return true;
 			}, 
 			error: function(code, message) {
-				showError(message + " (Error code: " + code + ")");
+				showError(message); // + " (Error code: " + code + ")");
                 showInfo("");
 				return false;
 			}
@@ -60,11 +71,18 @@ function showArtists(topartists, username) {
 		showError("No artists found.");
 		return;
 	}
+    
+	showLoaded(userpercentage);
 	
 	// Establish table
 	$("table#vis").remove();
 	$("table h2").remove();
-	var vistable = d3.select("#sec_vis").append("h2").text("Album list");
+	var visheader = d3.select("#sec_vis").append("h2").text("Chart for " + username);
+    var vislegend = d3.select("#sec_vis").append("p").text("Legend: ");
+    vislegend.append("span").attr("class", "album-legend no-listens").text("Album with no listens");
+    vislegend.append("span").attr("class", "album-legend few-listens").text("Album with a few listens");
+    vislegend.append("span").attr("class", "album-legend many-listens").text("Album with many listens");
+    
 	var vistable = d3.select("#sec_vis").append("table").attr("class", "vis").attr("id", "vis");
 	var selection = vistable.selectAll("tr").data(topartists.artist);
 	
@@ -83,7 +101,6 @@ function showArtists(topartists, username) {
 	cols_albums.attr("id", function(d) {
         return getAlbumColID(d.name);
     });
-	console.log("Artist table built.");
     
 	// Get albums for each artist one at a time (reduce conflicts)
 	var getNextArtist = function(i) {
@@ -91,7 +108,7 @@ function showArtists(topartists, username) {
 		var artist = topartists.artist[i];
 		//console.log("Fetching albums for artist " + artist.name);
 		lastfm.artist.getTopAlbums(
-            { artist: artist.name, limit: albumlimit, api_key: apiKey, callback: testy },
+            { artist: artist.name, limit: albumlimit, api_key: apiKey },
             {
                 success: function(data) {
                     getAlbumInfo(data.topalbums, artist.name, username);
@@ -111,7 +128,6 @@ function showArtists(topartists, username) {
 function getAlbumInfo(topalbums, artist, username) {
 	//console.log("Collecting album info for artist " + artist);
 	var albuminfo = [];
-	var ready_albums = 0;
 	var total_albums = 0;
 	if(topalbums && topalbums.album) total_albums = topalbums.album.length;
 	
@@ -124,20 +140,23 @@ function getAlbumInfo(topalbums, artist, username) {
 		var album = topalbums.album[i];
 		
 		if(filterAlbum(album, topalbums.album)) {
-			console.log("Skipping album " + album.name + " by " + artist);
-		} else {		
-			// console.log("Getting info for album " + album.name + " by " + artist);
+			// console.log("Skipping album " + album.name + " by " + artist);
+		} else {
 			lastfm.album.getInfo(
 				{ artist: artist, album: album.name, autocorrect: 0, username: username, api_key: apiKey },
 				{
 					success: function(data) {
-						ready_albums++;
-						albuminfo[getAlbumID(album.name)] = data;
-						getNextAlbum(i+1);
+                        var releasedate = $.trim(data.album.releasedate);
+                        if(typeof releasedate == 'undefined' || (releasedate + " ").length < 3 || !releasedate) {
+                            albuminfo[getAlbumID(album.name)] = data;
+                            getNextAlbum(i+1);
+                        } else {
+                            albuminfo[getAlbumID(album.name)] = data;
+                            getNextAlbum(i+1);
+                        }
 					}, 
 					error: function(code, message) {
-						ready_albums++;
-						console.log("Fetching album info for album " + album.name + " by " + artist + " failed. (" + ready_albums + ")");
+						console.log("Fetching album info for album " + album.name + " by " + artist + " failed.");
 						showError(message + " (Error code: " + code + ")");
 					}
 			});
@@ -154,8 +173,12 @@ function displayAlbums(topalbums, albuminfo, artist) {
         // Sort albums according to release year
         var displayalbums = topalbums.album;
         displayalbums.sort(function(a, b) {
-            a_year = getYearFromReleaseDate(albuminfo[getAlbumID(a.name)].album.releasedate);
-            b_year = getYearFromReleaseDate(albuminfo[getAlbumID(b.name)].album.releasedate);
+            a_year = 0;
+            if(albuminfo[getAlbumID(a.name)])
+                a_year = getYearFromReleaseDate(albuminfo[getAlbumID(a.name)].album.releasedate);
+            b_year = 0;
+            if(albuminfo[getAlbumID(b.name)])
+                b_year = getYearFromReleaseDate(albuminfo[getAlbumID(b.name)].album.releasedate);
             return a_year - b_year;
         })
         
@@ -176,14 +199,15 @@ function displayAlbums(topalbums, albuminfo, artist) {
         spans.attr("title", function(d) {
             return d.name;
         });
+        
+        var manylimit = 12;
+        
         spans.attr('class', function(d) {
             var name = d.name;
             var id = getAlbumID(name);
             var info = albuminfo[id].album;
             var listens = info.userplaycount;
-            if(listens > 100) return "album tonsof-listens";
-            if(listens > 30) return "album many-listens";
-            else if(listens > 5) return "album some-listens";
+            if(listens > manylimit) return "album many-listens";
             else if(listens > 0) return "album few-listens";
             else	return "album no-listens";
         });
@@ -194,17 +218,17 @@ function displayAlbums(topalbums, albuminfo, artist) {
 	if(percentage >= 100)
 		showInfo("Done.");
 	else
-		showInfo(percentage + "% loaded");
+		showLoaded(percentage);
 }
 
 // Various helper functions
 
 function getAlbumColID(artistname) {
-    return artistname.toLowerCase().replace(/ /g, "") + "_albums";
+    return "albums-" + artistname.toLowerCase().replace(/ /g, "");
 }
 
 function getAlbumID(albumname) {
-    return albumname.toLowerCase().replace(/ /g, "");
+    return "album-" + albumname.toLowerCase().replace(/ /g, "");
 }
 
 function getYearFromReleaseDate(releasedate) {
@@ -228,6 +252,7 @@ function cleanAlbumName(name) {
 function filterAlbum(album, allalbums) {
 	var name = album.name;
 	var listeners = album.listeners;
+    var releasedate = album.releasedate;
 	
     // Immediate reject rules
     if(listeners < 10) return true;
@@ -270,6 +295,10 @@ function showInfo(msg) {
 		$("#infomsg").text("");
 }
 
+function showLoaded(percentage) {
+    showInfo((percentage).toFixed(0) + "% loaded");
+}
+
 function count(arr) {
   counter = 0; 
   for(var elem in arr) counter++; 
@@ -286,4 +315,14 @@ function toggle(elem) {
 
 function hideAll(elems) {
     elems.addClass("hide");
+}
+
+function blink() {
+    if(working) {
+        var elm = document.getElementById('infomsg');
+        if (elm.style.color == 'rgb(30, 30, 30)')
+          elm.style.color = 'rgb(140, 140, 140)';
+        else
+          elm.style.color = 'rgb(30, 30, 30)';
+    }
 }
