@@ -11,7 +11,7 @@ body {
 
 section, footer {
     background: #FDFFFB;
-    padding: 1em 2em;
+    padding: 1em 1em;
 }
 
 header {
@@ -21,6 +21,12 @@ header {
 
 section#sec_input {
     border-top: 3px solid #C8CEB3;
+}
+
+section#sec_vis {
+    background: #ffffff;
+    border-top: 1px solid #CCCCCC;
+    border-bottom: 1px solid #CCCCCC;
 }
 
 footer {

@@ -6,14 +6,12 @@
 * D3.js (http://d3js.org/)
 */
 
-var artistlimit = 30;
-var albumlimit = 25;
+var artistlimit = 35;
+var albumlimit = 50;
 var working = false;
 
-$(document).ready(function() {	
-	/* Create a cache object */
-	//var cache = new LastFMCache();
-	//alert(cache);
+// Set up blink
+$(document).ready(function() {
     window.setInterval(blink,600);
 });
 
@@ -22,13 +20,12 @@ var apiSecret = '6dbb762ff870c4eb50c50cb1d1a32c1a'
 var lastfm = new LastFM({
 	apiKey    : apiKey,
 	apiSecret : apiSecret,
-	//cache     : cache
 });
 
 var ok_artists;
 var artist_count;
-var userpercentage = 100/artistlimit*1;
-var artistpercentage = 100/artistlimit*2;
+var userpercentage = 100 / artistlimit * 1;
+var artistpercentage = 100 / artistlimit * 2;
 
 // Get initial data (top artists) from Last.fm according to the given username
 function fetchData() {
@@ -41,7 +38,7 @@ function fetchData() {
 	// Get and check username
 	var username = $("#username").val();
     if(username.length < 1) {
-        showInfo("Enter a Last.fm username.");
+        stopLoading("Enter a Last.fm username.", "");
         return;
     }
 
@@ -57,8 +54,7 @@ function fetchData() {
 				return true;
 			}, 
 			error: function(code, message) {
-				showError(message); // + " (Error code: " + code + ")");
-                showInfo("");
+                stopLoading("", message);
 				return false;
 			}
 	});
@@ -68,7 +64,7 @@ function fetchData() {
 function showArtists(topartists, username) {
 	
 	if(!topartists.artist) {
-		showError("No artists found.");
+        stopLoading("", "No artists found.");
 		return;
 	}
     
@@ -88,10 +84,12 @@ function showArtists(topartists, username) {
 	
 	// Add a row for each artist
 	var rows = selection.enter().append("tr").attr("class", "artist");
-    var cols_playcount = rows.append("td").attr("class", "playcount");
-	cols_playcount.text(function(d) {
-		return d.playcount + " plays";
-	});
+    
+    //var cols_playcount = rows.append("td").attr("class", "playcount");
+	//cols_playcount.text(function(d) {
+	//	return d.playcount + " plays";
+	//});
+    
 	var cols_name = rows.append("td").attr("class", "artist");
 	cols_name.text(function(d) {
 		return d.name;
@@ -111,8 +109,11 @@ function showArtists(topartists, username) {
             { artist: artist.name, limit: albumlimit, api_key: apiKey },
             {
                 success: function(data) {
-                    getAlbumInfo(data.topalbums, artist.name, username);
-					getNextArtist(i + 1);
+                    if(working)
+                    {
+                        getAlbumInfo(data.topalbums, artist.name, username);
+                        getNextArtist(i + 1);
+                    }
                 }, 
                 error: function(code, message) {
 					console.log("Fetching albums info for artist " + artist.name + " failed.");
@@ -133,15 +134,14 @@ function getAlbumInfo(topalbums, artist, username) {
 	
     // Get additional data, one at a time
 	var getNextAlbum = function getNext(i) {
-		if(i >= total_albums) {
+		if(!working || i >= total_albums) {
 			displayAlbums(topalbums, albuminfo, artist);
 			return;
 		}
 		var album = topalbums.album[i];
 		
-		if(filterAlbum(album, topalbums.album)) {
-			// console.log("Skipping album " + album.name + " by " + artist);
-		} else {
+		if(!filterAlbum(album, topalbums.album)) 
+        {
 			lastfm.album.getInfo(
 				{ artist: artist, album: album.name, autocorrect: 0, username: username, api_key: apiKey },
 				{
@@ -167,7 +167,7 @@ function getAlbumInfo(topalbums, artist, username) {
  
  // Adds albums of a particular artist to the table (assumes artist rows have been built)
 function displayAlbums(topalbums, albuminfo, artist) {
-	// console.log("Displaying albums for artist " + artist + "(" + count(albuminfo) + " albums)");
+	console.log("Displaying albums for artist " + artist + "(" + count(albuminfo) + " albums)");
     if(count(albuminfo) > 0) {
 	
         // Sort albums according to release year
@@ -216,7 +216,10 @@ function displayAlbums(topalbums, albuminfo, artist) {
 	ok_artists++;
 	var percentage = Math.round(ok_artists / artist_count * (100 - userpercentage + artistpercentage)) + userpercentage + artistpercentage;
 	if(percentage >= 100)
-		showInfo("Done.");
+    {
+		stopLoading( "Done.", "" );
+        working
+    }
 	else
 		showLoaded(percentage);
 }
@@ -224,7 +227,7 @@ function displayAlbums(topalbums, albuminfo, artist) {
 // Various helper functions
 
 function getAlbumColID(artistname) {
-    return "albums-" + artistname.toLowerCase().replace(/ /g, "");
+    return "albums-" + artistname.toLowerCase().replace(/[ \.]/g, "");
 }
 
 function getAlbumID(albumname) {
@@ -250,12 +253,15 @@ function cleanAlbumName(name) {
 
 // Filter albums based on basic data to avoid duplicates, deluxe editions etc, true = skippable album
 function filterAlbum(album, allalbums) {
+    if(!album) return true;
+    
 	var name = album.name;
 	var listeners = album.listeners;
     var releasedate = album.releasedate;
 	
     // Immediate reject rules
     if(listeners < 10) return true;
+	else if(name.replace(/Rarities/g,"").length < name.length) suspicious = true;
     
     // Reject only if a cleaner-sounding album exists on the list (for example: reject "Album (disc 1)" if "Album" exists
     var suspicious = false;
@@ -272,13 +278,19 @@ function filterAlbum(album, allalbums) {
             if(otheralbum.name === album.name) continue; // same album
             var simplename2 = cleanAlbumName(otheralbum.name);
             if(simplename2 === simplename) {
-                console.log("Rejected: " + simplename + " (" + album.name + ") === " + simplename2 + "(" + otheralbum.name + ")");
+                // console.log("Rejected: " + simplename + " (" + album.name + ") === " + simplename2 + "(" + otheralbum.name + ")");
                 return true;
             }
         }
     }
     
 	return false;
+}
+
+function stopLoading( info, error ) {
+    showInfo( info );
+    showError(error);
+    working = false;
 }
 
 function showError(msg) {

@@ -5,6 +5,7 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <meta name="description" content="A Last.fm app for finding albums you might like.">
     <meta name="author" content="Noora Routasuo">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <link rel="stylesheet" href="app.css">
 </head>
 <body>
@@ -18,11 +19,11 @@
 
 <header>
     <h1><span class="highlight">Last.fm</span> Album Charter</h1>
-    <h2>Find albums you should listen to</h2>
+    <h2>Find albums you missed & albums you should listen to</h2>
 </header>
 
 <section id="sec_input">
-	<p>Do you ever miss the news that an artist you like has released a new album? Or perhaps you've forgotten an older one. This chart will show your top artists and highlight their albums according to how much you have listened to them.</p>
+	<p>Do you ever miss the news that an artist you like has released a new album? Or perhaps you've overlooked an older one. This handly little app will list your top artists, all of their albums, and highlight the ones you haven't listened to.</p>
 	<label>Your <a href="www.last.fm/">Last.fm</a> username:</label>
 	<input type="text" placeholder="" id="username">
 	<button class="btn" onclick="fetchData();">Submit</button>
@@ -35,7 +36,7 @@
 
 <footer>
     <h2>About</h2>
-    <p>Albums are filtered by name to avoid duplicates and special editions, so it's possible some albums are missing.</p>
+    <p>Last.fm Album Charter by <a href="https://github.com/nroutasuo">Noora Routasuo</a>. Albums are filtered to avoid duplicates, special editions, demos, etc, so it's possible some albums are missing.</p>
 	<p>Built with <a href="https://github.com/fxb/javascript-last.fm-api/">JavaScript last.fm API</a> and <a href="http://d3js.org/">D3.js</a>.</p>
 </footer>
 
