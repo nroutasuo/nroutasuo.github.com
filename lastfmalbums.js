@@ -6,7 +6,7 @@
 * D3.js (http://d3js.org/)
 */
 
-var artistlimit = 35;
+var artistlimit = 50;
 var albumlimit = 50;
 var working = false;
 
@@ -23,15 +23,17 @@ var lastfm = new LastFM({
 });
 
 var ok_artists;
+var progress_artists;
+var ok_albums;
 var artist_count;
-var userpercentage = 100 / artistlimit * 1;
-var artistpercentage = 100 / artistlimit * 2;
 
 // Get initial data (top artists) from Last.fm according to the given username
 function fetchData() {
     
     // Clear up any previous chart
 	ok_artists = 0;
+    progress_artists = 0;
+    ok_albums = 0;
 	showError("");    
     $("#sec_vis").children().remove();
     
@@ -41,6 +43,14 @@ function fetchData() {
         stopLoading("Enter a Last.fm username.", "");
         return;
     }
+    
+    // Get and check artist count
+	var count = Number($("#artistcount").val());
+    if(count <= 0) {
+        stopLoading("Enter a number of top artists to load.", "");
+        return;
+    }
+    artistlimit = count;
 
 	// Load top artists
     working = true;
@@ -49,7 +59,7 @@ function fetchData() {
 		{ user: username, limit: artistlimit, api_key: apiKey }, 
 		{
 			success: function(data) {
-				showLoaded(userpercentage+artistpercentage);
+				showInfo("Top artists loaded. Loading albums..");
 				showArtists(data.topartists, username);
 				return true;
 			}, 
@@ -67,8 +77,6 @@ function showArtists(topartists, username) {
         stopLoading("", "No artists found.");
 		return;
 	}
-    
-	showLoaded(userpercentage);
 	
 	// Establish table
 	$("table#vis").remove();
@@ -102,9 +110,11 @@ function showArtists(topartists, username) {
     
 	// Get albums for each artist one at a time (reduce conflicts)
 	var getNextArtist = function(i) {
+        
 		if(i >= topartists.artist.length) return false;
 		var artist = topartists.artist[i];
-		//console.log("Fetching albums for artist " + artist.name);
+        progress_artists++;
+		// console.log("Fetching albums for artist " + artist.name + " (" + (i + 1) + ") (in progress: " + progress_artists + ")");
 		lastfm.artist.getTopAlbums(
             { artist: artist.name, limit: albumlimit, api_key: apiKey },
             {
@@ -127,18 +137,28 @@ function showArtists(topartists, username) {
 
 // Fetach additional album info for an artist before displaying albums
 function getAlbumInfo(topalbums, artist, username) {
-	//console.log("Collecting album info for artist " + artist);
+	// console.log("Collecting album info for artist " + artist);
 	var albuminfo = [];
 	var total_albums = 0;
 	if(topalbums && topalbums.album) total_albums = topalbums.album.length;
 	
     // Get additional data, one at a time
 	var getNextAlbum = function getNext(i) {
-		if(!working || i >= total_albums) {
+        if(!working) {
+            console.log("Loading album info interrupted.");
+            return;
+        }
+        
+        ok_albums++;
+        
+		if(i >= total_albums) {
 			displayAlbums(topalbums, albuminfo, artist);
 			return;
 		}
+        
 		var album = topalbums.album[i];
+        showLoaded(getProgressPercentage());          
+        // console.log("Collecting album info for album " + album.name + "(" + (i + 1) + "/" + (total_albums) + ")");
 		
 		if(!filterAlbum(album, topalbums.album)) 
         {
@@ -146,32 +166,38 @@ function getAlbumInfo(topalbums, artist, username) {
 				{ artist: artist, album: album.name, autocorrect: 0, username: username, api_key: apiKey },
 				{
 					success: function(data) {
-                        var releasedate = $.trim(data.album.releasedate);
-                        if(typeof releasedate == 'undefined' || (releasedate + " ").length < 3 || !releasedate) {
-                            albuminfo[getAlbumID(album.name)] = data;
-                            getNextAlbum(i+1);
-                        } else {
-                            albuminfo[getAlbumID(album.name)] = data;
-                            getNextAlbum(i+1);
-                        }
+                        albuminfo[getAlbumID(album.name)] = data;
+                        getNextAlbum(i+1);
 					}, 
 					error: function(code, message) {
 						console.log("Fetching album info for album " + album.name + " by " + artist + " failed.");
 						showError(message + " (Error code: " + code + ")");
 					}
 			});
-		}
+		} else {
+            getNextAlbum(i+1);
+        }
     }
 	getNextAlbum(0);
 }
  
  // Adds albums of a particular artist to the table (assumes artist rows have been built)
 function displayAlbums(topalbums, albuminfo, artist) {
-	console.log("Displaying albums for artist " + artist + "(" + count(albuminfo) + " albums)");
+	// console.log("Displaying albums for artist " + artist + "(" + count(albuminfo) + " albums)");
     if(count(albuminfo) > 0) {
-	
+        
+        // Filter albums with info
+        var displayalbums = [];        
+        for (index = 0; index < topalbums.album.length; ++index) {
+            var name = topalbums.album[index].name;
+            var id = getAlbumID(name);
+            if(albuminfo[id])
+            {
+                displayalbums[displayalbums.length] = topalbums.album[index];
+            }
+        }
+        
         // Sort albums according to release year
-        var displayalbums = topalbums.album;
         displayalbums.sort(function(a, b) {
             a_year = 0;
             if(albuminfo[getAlbumID(a.name)])
@@ -180,7 +206,7 @@ function displayAlbums(topalbums, albuminfo, artist) {
             if(albuminfo[getAlbumID(b.name)])
                 b_year = getYearFromReleaseDate(albuminfo[getAlbumID(b.name)].album.releasedate);
             return a_year - b_year;
-        })
+        });
         
         // Display albums in table
         var colid = "#" + getAlbumColID(artist);
@@ -200,7 +226,7 @@ function displayAlbums(topalbums, albuminfo, artist) {
             return d.name;
         });
         
-        var manylimit = 12;
+        var manylimit = 15;
         
         spans.attr('class', function(d) {
             var name = d.name;
@@ -213,12 +239,14 @@ function displayAlbums(topalbums, albuminfo, artist) {
         });
     }
     
-	ok_artists++;
-	var percentage = Math.round(ok_artists / artist_count * (100 - userpercentage + artistpercentage)) + userpercentage + artistpercentage;
+	ok_artists++;            
+    progress_artists--;
+    if(topalbums)
+        ok_albums -= count(topalbums.album);
+	var percentage = getProgressPercentage();
 	if(percentage >= 100)
     {
 		stopLoading( "Done.", "" );
-        working
     }
 	else
 		showLoaded(percentage);
@@ -226,8 +254,15 @@ function displayAlbums(topalbums, albuminfo, artist) {
 
 // Various helper functions
 
+function getProgressPercentage() {
+    var artistVal = (ok_artists / artist_count);
+    var albumVal = progress_artists > 0 ? ok_albums / (albumlimit * progress_artists) : 0;
+    var albumVal = albumVal * (1 / artist_count);
+    return Math.round( (artistVal + albumVal) * 100 );
+}
+
 function getAlbumColID(artistname) {
-    return "albums-" + artistname.toLowerCase().replace(/[ \.]/g, "");
+    return "albums-" + artistname.toLowerCase().replace(/[ \.\/\']/g, "");
 }
 
 function getAlbumID(albumname) {
@@ -245,9 +280,11 @@ function getYearFromReleaseDate(releasedate) {
 
 function cleanAlbumName(name) {
     var cleanname = name.trim().toLowerCase().replace(/\(.*/g, "").trim();
+    cleanname = cleanname.replace(/disc/g, " ");
     cleanname = cleanname.replace("&", "and");
-    cleanname = cleanname.replace("-", "");
+    cleanname = cleanname.replace("/[-|]/g", "");
     cleanname = cleanname.replace(/  /g, " ");
+    //console.log(cleanname);
     return cleanname.trim();
 }
 
@@ -261,15 +298,16 @@ function filterAlbum(album, allalbums) {
 	
     // Immediate reject rules
     if(listeners < 10) return true;
-	else if(name.replace(/Rarities/g,"").length < name.length) suspicious = true;
+	if(name.replace(/Rarities/g,"").length < name.length) return true;
+    if(releasedate == "undefined") return true;
     
     // Reject only if a cleaner-sounding album exists on the list (for example: reject "Album (disc 1)" if "Album" exists
     var suspicious = false;
 	if(name.toLowerCase().indexOf("bonus") != -1) suspicious = true;
-	else if(name.toLowerCase().indexOf("disc") != -1) suspicious = true;
-	else if(name.toLowerCase().indexOf("deluxe") != -1) suspicious = true;
-	else if(name.toLowerCase().indexOf("remaster") != -1) suspicious = true;
-	else if(name.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"").length < name.length) suspicious = true;
+	if(name.toLowerCase().indexOf("disc") != -1) suspicious = true;
+	if(name.toLowerCase().indexOf("deluxe") != -1) suspicious = true;
+	if(name.toLowerCase().indexOf("remaster") != -1) suspicious = true;
+	if(name.replace(/[\.,-\/#!\?$%\^&\*;:{}=\-_`~()12345]/g,"").length < name.length) suspicious = true;
     
     if(suspicious) {
         var simplename = cleanAlbumName(name);
@@ -278,7 +316,7 @@ function filterAlbum(album, allalbums) {
             if(otheralbum.name === album.name) continue; // same album
             var simplename2 = cleanAlbumName(otheralbum.name);
             if(simplename2 === simplename) {
-                // console.log("Rejected: " + simplename + " (" + album.name + ") === " + simplename2 + "(" + otheralbum.name + ")");
+                //console.log("Rejected: " + simplename + " (" + album.name + ") === " + simplename2 + "(" + otheralbum.name + ")");
                 return true;
             }
         }
@@ -290,7 +328,7 @@ function filterAlbum(album, allalbums) {
 function stopLoading( info, error ) {
     showInfo( info );
     showError(error);
-    working = false;
+    //working = false;
 }
 
 function showError(msg) {

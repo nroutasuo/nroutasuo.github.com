@@ -118,6 +118,7 @@ table.vis {
 	padding: 0;
     border-spacing: 0;
     border-collapse: collapse;
+    min-width: 100%;
 }
 
 table.vis tr {
@@ -127,6 +128,10 @@ table.vis td {
 	padding: 1px 6px 1px 0px;
     border-top: 1px solid #cccccc;
     border-bottom: 1px solid #cccccc;
+}
+
+table.vis td.artist {
+    font-weight: bold;
 }
 
 table.vis td.playcount {
