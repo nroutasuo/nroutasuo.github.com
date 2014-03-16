@@ -8,6 +8,7 @@
 
 var artistlimit = 50;
 var albumlimit = 50;
+var albumlimit_display = 25;
 var working = false;
 
 // Set up blink
@@ -77,6 +78,14 @@ function fetchData() {
 	});
 }
 
+function cancel() {
+    stopLoading('Cancelled.','');
+	$("table#vis").remove();
+	$("table h2").remove();  
+	$("#sec_vis h2").remove();   
+	$("#sec_vis p").remove();   
+}
+
 // Show artist data and create basic results table
 function showArtists(topartists, username) {
 	
@@ -89,10 +98,12 @@ function showArtists(topartists, username) {
 	$("table#vis").remove();
 	$("table h2").remove();
 	var visheader = d3.select("#sec_vis").append("h2").text("Chart for " + username);
-    var vislegend = d3.select("#sec_vis").append("p").text("Legend: ");
-    vislegend.append("span").attr("class", "album-legend no-listens").text("Album with no listens");
-    vislegend.append("span").attr("class", "album-legend few-listens").text("Album with a few listens");
-    vislegend.append("span").attr("class", "album-legend many-listens").text("Album with many listens");
+    var vislegend = d3.select("#sec_vis").append("p").text("Legend:");
+    var vislegend_color = vislegend.append("p").text("Color indicates scrobbles by user:");
+    vislegend_color.append("span").attr("class", "album-legend no-listens").text("Album with no scrobbles");
+    vislegend_color.append("span").attr("class", "album-legend few-listens").text("Album with a few scrobbles");
+    vislegend_color.append("span").attr("class", "album-legend many-listens").text("Album with many scrobbles");
+    var vislegend_size = vislegend.append("span").text("Size indicates relative popularity (total scrobbles per album / total scrobbles per artist).");
     
 	var vistable = d3.select("#sec_vis").append("table").attr("class", "vis").attr("id", "vis");
 	var selection = vistable.selectAll("tr").data(topartists.artist);
@@ -102,7 +113,7 @@ function showArtists(topartists, username) {
     
     var cols_playcount = rows.append("td").attr("class", "playcount");
 	cols_playcount.text(function(d) {
-		return d.playcount + " plays";
+		return d.playcount;
 	});
     
 	var cols_name = rows.append("td").attr("class", "artist");
@@ -129,23 +140,32 @@ function getArtistInfos(topartists, username )
 			topartists.artist = [];
 			topartists.artist[0] = artist;
 		}
-			
-		// console.log("Fetching infos for artist " + artist.name + " (" + (i + 1) + ") (in progress: " + progress_artists + ")");
-		lastfm.artist.getInfo(
-            { artist: artist.name, api_key: apiKey },
-            {
-                success: function(data) {
-                    if(working)
-                    {
-                        artist_infos[getArtistID(artist.name)] = data.artist;
-                        getNextArtist(i + 1);
+		
+        var artist_id = getArtistID(artist.name);
+        if(artist_infos[artist_id])
+        {
+            // console.log("Using existing infos for artist " + artist.name + " (" + (i + 1) + ") (in progress: " + progress_artists + ")");
+            getNextArtist(i + 1);            
+        }
+        else
+        {
+            // console.log("Fetching infos for artist " + artist.name + " (" + (i + 1) + ") (in progress: " + progress_artists + ")");
+            lastfm.artist.getInfo(
+                { artist: artist.name, api_key: apiKey },
+                {
+                    success: function(data) {
+                        if(working)
+                        {
+                            artist_infos[artist_id] = data.artist;
+                            getNextArtist(i + 1);
+                        }
+                    }, 
+                    error: function(code, message) {
+                        console.log("Fetching info for artist " + artist.name + " failed.");
+                        showError(message + " (Error code: " + code + ")");
                     }
-                }, 
-                error: function(code, message) {
-					console.log("Fetching info for artist " + artist.name + " failed.");
-                    showError(message + " (Error code: " + code + ")");
-                }
-        });
+            });
+        }
 	}
 	
 	getNextArtist(0);
@@ -215,7 +235,7 @@ function getAlbumInfo(topalbums, artist, username) {
                         if(filter2.length <= 0)
                             album_infos[getAlbumID(album.name)] = data;
                         else
-                            registerFiltered(filter2, album);                            
+                            registerFiltered(filter2, album, artist.name);                            
                         getNextAlbum(i+1);
 					}, 
 					error: function(code, message) {
@@ -224,7 +244,7 @@ function getAlbumInfo(topalbums, artist, username) {
 					}
 			});
 		} else {
-            registerFiltered(filter1, album);
+            registerFiltered(filter1, album, artist.name);
             getNextAlbum(i+1);
         }
     }
@@ -238,7 +258,7 @@ function displayAlbums(topalbums, artist) {
         
         // Filter albums with info
         var displayalbums = [];        
-        for (index = 0; index < topalbums.album.length; ++index) {
+        for (index = 0; index < Math.min(topalbums.album.length, albumlimit_display); ++index) {
             var name = topalbums.album[index].name;
             var id = getAlbumID(name);
             if(album_infos[id])
@@ -261,31 +281,46 @@ function displayAlbums(topalbums, artist) {
         // Display albums in table
         var colid = "#" + getAlbumColID(artist);
         var td = d3.select(colid).selectAll("span").data(displayalbums);
-        var spans = td.enter().append("span");
-        var links = spans.append("a");
+        var albumDiv = td.enter().append("div");
+        var links = albumDiv.append("a");
+        var yearSpan = links.append("span").attr("class", "span-year");
+        var artistSpan = links.append("span").attr("class", "span-name");
         
-        links.text(function(d) {
+        yearSpan.text(function(d) {
             var name = d.name;
-            return name;
             var id = getAlbumID(name);
             var info = album_infos[id].album;
             var year = getYearFromReleaseDate(info.releasedate);
             var url = info.url;
-            if(year.length < 1) return "????";
+            if(year.length < 1) return "[n/a]";
             return year;
+        });
+        
+        artistSpan.text(function(d) {
+            return d.name;
         });
         
         links.attr("href", function(d) {
             return d.url;
         });
         
-        spans.attr("title", function(d) {
+        albumDiv.attr("title", function(d) {
             return d.name;
+        });
+        
+        albumDiv.attr("style", function(d) {
+            var name = d.name;
+            var id = getAlbumID(name);
+            var info = album_infos[id].album;
+            var playcount = info.playcount;
+            var artist_total_playcount = artist_infos[getArtistID(artist)].stats.playcount;
+            var w = 1.8 + (playcount / artist_total_playcount) * 30;
+            return "width: " + w + "em";
         });
         
         var manylimit = 15;
         
-        spans.attr('class', function(d) {
+        albumDiv.attr('class', function(d) {
             var name = d.name;
             var id = getAlbumID(name);
             var info = album_infos[id].album;
@@ -294,6 +329,7 @@ function displayAlbums(topalbums, artist) {
             else if(listens > 0) return "album few-listens";
             else	return "album no-listens";
         });
+        
     }
     
 	ok_artists++;            
@@ -338,7 +374,7 @@ function getAlbumID(albumname) {
 }
 
 function getArtistID(artistname) {
-    return "artist-" + artistname.toLowerCase().replace(/[ \.\/\']/g, "");
+    return "artist-" + artistname.toLowerCase().replace(/[ &\.\/\']/g, "");
 }
 
 
@@ -455,21 +491,25 @@ function filterAlbumByDetailedInfo( albuminfo, allalbums, artist ) {
     var artist_playcount = artist.playcount; // artist plays by user
 	var artist_total_playcount = artist_infos[getArtistID(artist.name)].stats.playcount;
 	
-    if(album_playcount / artist_total_playcount < 0.001) return "few relative playcount";
+    if(album_playcount / artist_total_playcount < 0.0007) return "few relative playcount";
     
     return "";
 }
 
-function registerFiltered( reason, album ) {
-    if(filtered_albums[reason])
-        filtered_albums[reason][filtered_albums[reason].length] = album.name;
-    else
+function registerFiltered( reason, album, artistName ) {
+    if(album)
     {
-        filtered_albums[reason] = [];
-        filtered_albums[reason][0] = album.name;
-   	}
+        if(!filtered_albums[reason])
+            filtered_albums[reason] = [];
         
-    // console.log("Filtered album [" + reason + "]: " + album.name + " (" + album.playcount + " scrobbles by all users)");
+        var artistID = getArtistID(artistName);
+        if(!filtered_albums[reason][artistID])
+            filtered_albums[reason][artistID] = [];
+            
+        filtered_albums[reason][artistID][filtered_albums[reason][artistID].length] = album.name;
+        
+        // console.log("Filtered album [" + reason + "]: " + album.name + " (" + album.playcount + " scrobbles by all users)");
+    }        
 }
 
 function stopLoading( info, error ) {
