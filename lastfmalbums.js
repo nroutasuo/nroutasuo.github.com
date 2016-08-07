@@ -144,12 +144,12 @@ function getArtistInfos(topartists, username )
         var artist_id = getArtistID(artist.name);
         if(artist_infos[artist_id])
         {
-            // console.log("Using existing infos for artist " + artist.name + " (" + (i + 1) + ") (in progress: " + progress_artists + ")");
+            console.log("Using existing infos for artist " + artist.name + " (" + (i + 1) + ") (in progress: " + progress_artists + ")");
             getNextArtist(i + 1);            
         }
         else
         {
-            // console.log("Fetching infos for artist " + artist.name + " (" + (i + 1) + ") (in progress: " + progress_artists + ")");
+            console.log("Fetching infos for artist " + artist.name + " (" + (i + 1) + ") (in progress: " + progress_artists + ")");
             lastfm.artist.getInfo(
                 { artist: artist.name, api_key: apiKey },
                 {
@@ -179,7 +179,7 @@ function getArtistAlbums(topartists, username )
 		if(i >= topartists.artist.length) return false;
 		var artist = topartists.artist[i];
         progress_artists++;
-		// console.log("Fetching albums for artist " + artist.name + " (" + (i + 1) + ") (in progress: " + progress_artists + ")");
+		console.log("Fetching albums for artist " + artist.name + " (" + (i + 1) + ") (in progress: " + progress_artists + ")");
 		lastfm.artist.getTopAlbums(
             { artist: artist.name, limit: albumlimit, api_key: apiKey },
             {
@@ -202,7 +202,7 @@ function getArtistAlbums(topartists, username )
 
 // Fetach additional album info for an artist before displaying albums
 function getAlbumInfo(topalbums, artist, username) {
-	// console.log("Collecting album info for artist " + artist.name);
+	console.log("Collecting album info for artist " + artist.name);
 	var total_albums = 0;
 	if(topalbums && topalbums.album) total_albums = topalbums.album.length;
 	
@@ -228,10 +228,10 @@ function getAlbumInfo(topalbums, artist, username) {
 		if(filter1.length <= 0) 
         {
 			lastfm.album.getInfo(
-				{ artist: artist.name, album: album.name, autocorrect: 0, username: username, api_key: apiKey },
+				{ artist: artist.name, album: album.name, autocorrect: 1, username: username, api_key: apiKey },
 				{
 					success: function(data) {
-                        var filter2 = filterAlbumByDetailedInfo( data.album, topalbums.album, artist );
+                        var filter2 = filterAlbumByDetailedInfo(data.album, topalbums.album, artist);
                         if(filter2.length <= 0)
                             album_infos[getAlbumID(album.name)] = data;
                         else
@@ -253,7 +253,7 @@ function getAlbumInfo(topalbums, artist, username) {
  
  // Adds albums of a particular artist to the table (assumes artist rows have been built)
 function displayAlbums(topalbums, artist) {
-	// console.log("Displaying albums for artist " + artist + "(" + count(albuminfo) + " albums)");
+	console.log("Displaying albums for artist " + artist);
     if(topalbums && count(album_infos) > 0) {
         
         // Filter albums with info
@@ -271,10 +271,10 @@ function displayAlbums(topalbums, artist) {
         displayalbums.sort(function(a, b) {
             a_year = 0;
             if(album_infos[getAlbumID(a.name)])
-                a_year = getYearFromReleaseDate(album_infos[getAlbumID(a.name)].album.releasedate);
+                a_year = getReleaseYear(album_infos[getAlbumID(a.name)]);
             b_year = 0;
             if(album_infos[getAlbumID(b.name)])
-                b_year = getYearFromReleaseDate(album_infos[getAlbumID(b.name)].album.releasedate);
+                b_year = getReleaseYear(album_infos[getAlbumID(b.name)]);
             return a_year - b_year;
         });
         
@@ -290,7 +290,7 @@ function displayAlbums(topalbums, artist) {
             var name = d.name;
             var id = getAlbumID(name);
             var info = album_infos[id].album;
-            var year = getYearFromReleaseDate(info.releasedate);
+            var year = getReleaseYear(album_infos[id]);
             var url = info.url;
             if(year.length < 1) return "[n/a]";
             return year;
@@ -314,7 +314,7 @@ function displayAlbums(topalbums, artist) {
             var info = album_infos[id].album;
             var playcount = info.playcount;
             var artist_total_playcount = artist_infos[getArtistID(artist)].stats.playcount;
-            var w = 1.8 + (playcount / artist_total_playcount) * 30;
+            var w = 2 + (playcount / artist_total_playcount) * 50;
             return "width: " + w + "em";
         });
         
@@ -377,6 +377,11 @@ function getArtistID(artistname) {
     return "artist-" + artistname.toLowerCase().replace(/[ &\.\/\']/g, "");
 }
 
+function getReleaseYear(albuminfo) {
+    var year = getYearFromReleaseDate(albuminfo.album.wiki ? albuminfo.album.wiki.published : albuminfo.album.releasedate)
+    // if (year == "????") console.log(albuminfo)
+    return year;
+}
 
 function getYearFromReleaseDate(releasedate) {
 	var date = releasedate;
@@ -445,8 +450,12 @@ function filterAlbumByBasicData(album, allalbums, skipDuplicateSearch) {
 	if(name.toLowerCase().replace(/remaster/g,"").length < name.length) return "remaster";
 	if(name.toLowerCase().replace("special edition","").length < name.length) return "edition";
 	if(name.toLowerCase().replace("deluxe edition","").length < name.length) return "edition";
+	if(name.toLowerCase().replace("anniversary edition","").length < name.length) return "edition";
+	if(name.toLowerCase().replace("greatest hits","").length < name.length) return "greatest hits";
+	if(name.toLowerCase().replace("best of","").length < name.length) return "best of";
+	if(name.toLowerCase().replace("(null)","").length < name.length) return "null";
 	if(name.toLowerCase().replace(/live ?[1234567890\- ]+/g,"").length < name.length) return "anon-live";
-	if(name.toLowerCase().replace(/[\(\[]disc ?[1234].*[\)\]]/g,"").length < name.length) return "disc-n";
+	if(name.toLowerCase().replace(/[\[]disc ?[1234].*[\]]/g,"").length < name.length) return "disc-n";
 	if(name.toLowerCase().replace(/[\(\[]cd ?[1234].*[\)\]]/g,"").length < name.length) return "disc-n";
     
     // Reject only if a cleaner-sounding album exists on the list (for example: reject "Album (bonus tracks)" if "Album" exists
@@ -456,6 +465,7 @@ function filterAlbumByBasicData(album, allalbums, skipDuplicateSearch) {
 	if(name.toLowerCase().indexOf("deluxe") != -1) suspicious = true;
 	if(name.toLowerCase().indexOf("live") != -1) suspicious = true;
 	if(name.toLowerCase().indexOf("demos") != -1) suspicious = true;
+	if(name.toLowerCase().indexOf("edition") != -1) suspicious = true;
 	if(name.replace(/[\.,-\/#!\?$%\^&\*;:{}=\-_`~()12345]/g,"").length < name.length) suspicious = true;
     
     if(suspicious && skipDuplicateSearch)
@@ -471,7 +481,7 @@ function filterAlbumByBasicData(album, allalbums, skipDuplicateSearch) {
         if(otheralbum.mbid === album.mbid) continue; // same album
         var simplename2 = cleanAlbumName(otheralbum.name);
         if(simplename2 === simplename) {
-        	var otherfilter = filterAlbumByBasicData(otheralbum, allalbums, true );
+        	var otherfilter = filterAlbumByBasicData(otheralbum, allalbums, true);
         	if(suspicious && otherfilter.length <= 0)
             	return "duplicate";
           	if(Number(album.playcount) < Number(otheralbum.playcount))
@@ -489,9 +499,12 @@ function filterAlbumByDetailedInfo( albuminfo, allalbums, artist ) {
     var album_tracks = albuminfo.tracks;
     
     var artist_playcount = artist.playcount; // artist plays by user
-	var artist_total_playcount = artist_infos[getArtistID(artist.name)].stats.playcount;
-	
-    if(album_playcount / artist_total_playcount < 0.0007) return "few relative playcount";
+    if (artist_infos[getArtistID(artist.name)]) {
+        var artist_total_playcount = artist_infos[getArtistID(artist.name)].stats.playcount;
+        if(album_playcount / artist_total_playcount < 0.0015) return "few relative playcount";
+    } else {
+        console.log("no stats for artist " + artist.name + " " + getArtistID(artist.name));
+    }
     
     return "";
 }
