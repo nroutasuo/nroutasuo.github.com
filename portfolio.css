@@ -1,0 +1,186 @@
+
+/* Overall layout */
+
+body {
+    background: #ffffff;
+    color: #111111;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 13px;
+    padding: 0px 1.60em;
+    margin: 0px;
+    line-height: 1.32em;
+}
+
+section {
+    padding: 1.60em;
+}
+
+section.sidebar {
+    width: 225pt;
+    float: left;
+    clear: left;
+    background: none;
+    border: none;
+}
+
+section.topic {
+    margin: 15px 15px 15px 260pt;
+    background: #dbeef3;
+    max-width: 750pt;
+}
+
+div.project {
+    min-height: 134px;
+    margin: 1.5em 0px;
+    position: relative;
+}
+
+div.project img {
+    width: 130px;
+    height: 130px;
+    border: 3px solid #eeeeee;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 65px;
+}
+
+div.project:hover img {
+    border-color: #ffffff;
+}
+div.project:hover h3 {
+}
+div.project img:hover {
+    opacity: .9;
+}
+
+div.project p, div.project h3, div.project ul {
+    margin-left: 150px;
+}
+
+@media all and (max-width: 900px) {
+
+    body {
+        padding: 0 !important;
+    }
+    section.topic {
+        margin-left: 245pt !important;
+        margin-right: 5px !important;
+    }
+    
+}
+
+@media all and (max-width: 750px) {
+
+    div#maincontainer {
+        padding: 0px;
+        border: none;
+    }
+    
+    section.sidebar {
+        width: auto;
+        float: none !important;
+    }
+    
+    section.topic {
+        margin-left: 5px !important;
+        margin-right: 5px !important;
+        float: none;
+    }
+    
+    ul#links li {
+        display: inline-block;
+    }
+}
+
+
+/* Defaults: headings, colours etc */
+
+h2, h3, h4, h5 {
+    color: #6C6245;
+}
+
+h2 { font-size: 22px; }
+h3 { font-size: 16px; }
+
+a:link {color:#E34530;}
+
+a:visited {
+    color: #E34530; 
+    text-decoration: line-through;
+}
+
+a:hover {
+    color: #F56935;
+    text-decoration: none;
+}
+
+a:active {color:#F56935;}
+
+ul {
+    margin-left: 0px;
+    margin-top: 0.4em;
+    margin-right:0.4em;
+    margin-bottom: 0.8em;
+    margin-left: 1.6em;
+    padding: 0px;
+}
+
+li:before {
+    content: "\00BB \0020";
+}
+
+ul ul li:before {
+    content: "";
+}
+
+
+/* Fine-tuning */
+
+ul {
+    cursor: auto;
+    list-style: none;
+    margin-left: 0;
+    color: inherit;
+}
+
+ul ul {
+    margin-left: 2.5em;
+    list-style: circle;
+}
+
+#examples-secondary div.project {
+    min-height: 69px;
+}
+
+ul.project-links {
+    display: inline-block;
+}
+
+ul.project-links li {
+    margin: 0 1em 0 0;
+}
+
+.hide {
+    display: none;
+}
+
+a.more, a.less {
+    color: #6C6245;
+}
+
+.expandable {
+    cursor: auto;
+    list-style: none;
+    color: #6C6245;
+}
+
+.expandable:hover {
+    cursor: pointer;
+    cursor: hand;
+    color: #8C8275;
+}
+
+.expandable ul li {
+    list-style: circle;
+}
