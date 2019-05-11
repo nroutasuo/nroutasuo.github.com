@@ -16,10 +16,6 @@ function setupInterestsList() {
         toggle($(this).children("ul"));
     });
     clickableli.children("ul").addClass("static");
-
-    // Let the visitor know
-    var p = document.getElementById("clickforinfo");
-    p.innerHTML = "Click on the keywords for details";
 }
 
 // Hide long project descriptions and add more/less links
