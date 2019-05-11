@@ -42,7 +42,7 @@ div.project img {
     position: absolute;
     top: 0;
     left: 0;
-    border-radius: 65px;
+    border-radius: 12px;
 }
 
 div.project:hover img {
@@ -97,7 +97,7 @@ div.project p, div.project h3, div.project ul {
 /* Defaults: headings, colours etc */
 
 h2, h3, h4, h5 {
-    color: #6C6245;
+    color: #45546c;
 }
 
 h2 { font-size: 22px; }
@@ -170,19 +170,19 @@ ul.project-links li {
 }
 
 a.more, a.less {
-    color: #6C6245;
+    color: #006699;
 }
 
 .expandable {
     cursor: auto;
     list-style: none;
-    color: #6C6245;
+    color: #006699;
 }
 
 .expandable:hover {
     cursor: pointer;
     cursor: hand;
-    color: #8C8275;
+    color: #0087ca;
 }
 
 .expandable ul li {
