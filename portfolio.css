@@ -169,7 +169,7 @@ ul.project-links li {
     text-decoration: line-through;
 }
 
-a.more, a.less {
+.more, .less {
     color: #006699;
 }
 
