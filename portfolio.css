@@ -16,7 +16,7 @@ section {
 }
 
 section.sidebar {
-    width: 225pt;
+    width: 210pt;
     float: left;
     clear: left;
     background: none;
@@ -24,9 +24,8 @@ section.sidebar {
 }
 
 section.topic {
-    margin: 15px 15px 15px 260pt;
+    margin: 15px 15px 15px 245pt;
     background: #dbeef3;
-    max-width: 750pt;
 }
 
 div.project {
