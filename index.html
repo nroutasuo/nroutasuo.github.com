@@ -7,260 +7,717 @@
     <meta charset="UTF-8">
 	<link rel="shortcut icon" href="favicon.ico" />
 	<link rel="image_src" href="favicon-32x32.png" />
-    <link rel="stylesheet" href="portfolio.css">
+    <link rel="stylesheet" href="css/portfolio.css">
+    <link rel="stylesheet" href="css/slick.css">
 </head>
 <body>
 
 <div id="maincontainer">
 
-<section id="intro" class="sidebar">
-    <h2>Noora Routasuo</h2>
-    <p>I'm a programmer and video game developer interested in data visualization, human-computer interaction, languages and clean code.</p>
-    <p>I graduated in 2013 from <a href="http://www.aalto.fi/en/">Aalto University</a> from the <a href="http://inf.tkk.fi/content/english/">Information Networks</a> degree programme and majored in Media Technology. Currently I am making mobile games in Stockholm at <a href="https://www.strangequest.com">Strange Quest</a>.</p>
-
-	<!--
-    <h2>Interests</h2>
-    <span id="clickforinfo">Click on the keywords for details</span>
-    
-    <ul id="interests">
-        <li>Games
-            <ul>
-                <li>Working since 2013 as a developer in mobile and web games</li>
-                <li>Media oriented studies included many game-related projects</li>
-                <li>Several personal game projects</li>
-            </ul></li>
-        <li>Human-Computer Interaction
-            <ul>
-                <li>My university minor "Human and Interaction" included studies in user interface design and perception</li>
-                <li>As a client developer I've worked closely with UI and UX designers to make great game interfaces</li>
-            </ul></li>
-        <li>Information Visualization
-            <ul>
-                <li>Topic of my Master's Thesis</li>
-                <li>Several personal projects</li>
-            </ul></li>
-        <li>Languages and communication
-            <ul>
-                <li>I speak Finnish and English, Japanese, Swedish, German and French</li>
-                <li>I've taught Finnish</li>
-                <li>I dabble in creative writing</li>
-            </ul></li>
-        <li>Language technology
-            <ul>
-                <li>I spent a year at the <a href="http://www.cl.ecei.tohoku.ac.jp/">Communications Science Lab</a> at <a href="http://www.tohoku.ac.jp/en/">Tohoku University</a></li>
-                <li>Topic of my Bachelor's Thesis (in Finnish)</li>
-            </ul></li>
-    </ul>
-	-->
-    
-    <h2>Links</h2>
-    <ul id="links">
-    <li><a href="http://www.linkedin.com/in/nooraroutasuo">LinkedIn</a></li>
-    <li><a href="https://www.xing.com/profile/Noora_Routasuo">Xing</a></li>
-    <li><a href="https://github.com/nroutasuo">GitHub</a></li>
-    </ul>
+<section id="intro">
+	<h2>Portfolio</h2>
+    <h1>Noora Routasuo</h1>
+	<div class="link-icons">
+		<a href="https://github.com/nroutasuo"><img src="icons/icon-github.svg" height="22"/></a>
+		<a href="https://www.linkedin.com/in/nroutasuo"><img src="icons/icon-linkedin.svg" height="22"/></a>
+		<a href="https://www.xing.com/profile/Noora_Routasuo"><img src="icons/icon-xing.svg" height="22"/></a>
+	</div>
+	<div class="intro-text">
+		<p>I'm a programmer and game developer who is interested in data visualization, human-computer interaction, languages and clean code.</p>
+		<p>I graduated in 2013 from <a href="http://www.aalto.fi/en/">Aalto University</a> from the <a href="http://inf.tkk.fi/content/english/">Information Networks</a> degree programme. I studied Media Technology and  Human-Computer Interaction. Currently I am making mobile games in Stockholm at <a href="https://www.strangequest.com">Strange Quest</a>.</p>
+	</div>
 </section>
 
-<section id="examples-professional" class="topic">
-    <h2>Professional Projects</h2>
-    
-    <div class="project">
-        <img src="portfolioimg/blastlands.png" title="Blastlands" />
-        <h3>Game development: Blastlands (2018-2019)</h3>
-        <p class="project-short">Action-packed multiplayer game released by <a href="https://www.strangequest.com">Strange Quest</a> for Android Early Access in July 2018 and iOS soft launch in selected countries in February 2019.</p>
-        <p class="project-long">Blastlands is a casual spin on mobile action games developed by a small team of games industry veterans. I joined the team in Match 2018 as a client developer. The game is built using the <a href="https://www.defold.com/">Defold</a> engine.</p>
-        <ul class="project-links">
-            <li><a href="http://blastlands.com">home page</a></li>
-            <li><a href="https://play.google.com/store/apps/details?id=com.strangequest.blastlands">download</a> @Google Play</li>
-            <li><a href="https://itunes.apple.com/se/app/blastlands-team-combat/id1443751542">download</a> @App Store</li>
-        </ul>
-    </div>
-    
-    <div class="project">
-        <img src="portfolioimg/placie.png" title="Placie" />
-        <h3>Mobile development: Placie (2016-2018)</h3>
-        <p class="project-short">Location-based AR social app released by <a href="https://bublar.com/">Bublar</a> for Android and iOS in November 2017.</p>
-        <p class="project-long">Placie lets users decorate and post pictures ("placies") in their location and view them in AR mode. The project started as a location-based AR game but shifted towards a gamified social app based on test user feedback. The app was built by a small team where everyone wore many hats. My main responsibility was client development in Unity/C# but I was also involved in UX and feature design, planning and testing etc.</p>
-        <ul class="project-links">
-            <li><a href="http://www.placieapp.com/">home page</a></li>
-            <li><a href="https://play.google.com/store/apps/details?id=com.bublar.fame">download</a> @Google Play</li>
-            <li><a href="https://itunes.apple.com/app/apple-store/id1176423309?pt=118266825&ct=LandingPage&mt=8">download</a> @App Store</li>
-        </ul>
-    </div>
-    
-    <div class="project">
-        <img src="portfolioimg/alittlelost.png" title="A Little Lost" />
-        <h3>Game development: A Little Lost (2015-2016)</h3>
-        <p class="project-short">Free-to-play match-3 puzzle game released by <a href="http://www.goodgamestudios.com/">Goodgame Studios</a> in August 2016 for Facebook, iOS and Android.</p>
-        <p class="project-long">The web version of the game is on Flash, using libraries such as <a href="http://gamua.com/starling/">Starling</a> and <a href="http://www.robotlegs.org/">Robotlegs</a>. The mobile version is built on Unity. Both versions use <a href="http://esotericsoftware.com/">Spine</a> for animations. I worked on the project as a client developer from its early stages all the way to the global release.</p>
-        <p>Unfortunately the game is no longer online.</p>
-        <ul class="project-links">
-            <li><a href="https://www.youtube.com/watch?v=t-Kab1yZ5LM">trailer</a> @Youtube</li>
-            <li><a href="https://www.youtube.com/playlist?list=PLi0SajuAcfwTd3UuAhxxz_7LD93OgBaFw">gameplay videos</a> @Youtube</li>
-        </ul>
-    </div>
-    
-    <div class="project">
-        <img src="portfolioimg/shadowkings2.jpg" title="Shadow Kings" />
-        <h3>Game development: Shadow Kings (2014-2015)</h3>
-        <p class="project-short">Free-to-play strategy MMO released by <a href="http://www.goodgamestudios.com/">Goodgame Studios</a> in August 2014 for web, iOS and Android.</p>
-        <p class="project-long">The game is built on the AIR platform, using libraries such as <a href="http://gamua.com/starling/">Starling</a> and <a href="http://www.robotlegs.org/">Robotlegs</a>. I was involved in the project as a client developer from creating the first buildings to global release and subsequent regular updates.</p>
-        <p>Unfortunately the game is no longer online.</p>
-        <ul class="project-links">
-            <li><a href="https://www.youtube.com/watch?v=XIt74o3SMbk">gameplay video</a> @Youtube</li>
-            <li><a href="http://www.gameogre.com/shadow-kings-dark-ages-first-impressions/">review</a> @GameOgre</li>
-        </ul>
-    </div>
+
+<section id="projects-games" class="content content-projects">
+	<h2>Game Projects</h2>
+	<div class="project-container">
+		<div class="project-tile">
+			<img src="tiles/gogogrenade.png" title="Go Go Grenade" class="project-tile-img" />
+			<div class="project-summary" data-modal-id="modal-ggg">
+					<div class="project-summary-container">
+					<span class="name">Go Go Grenade</span>
+					<span class="desc-short">A grenade launching social game.</span>
+					<span class="tags">
+						<span class="tag">Strange Quest</span>
+						<span class="tag">Mobile</span>
+						<span class="tag">Unity</span>
+						<span class="tag">C#</span>
+					</span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="project-tile">
+			<img src="tiles/blastlands.png" title="Blastlands" class="project-tile-img" />
+			<div class="project-summary" data-modal-id="modal-blastlands">
+				<div class="project-summary-container">
+					<span class="name">Blastlands</span>
+					<span class="desc-short">An action-packed mobile multiplayer game.</span>
+					<span class="tags">
+						<span class="tag">Strange Quest</span>
+						<span class="tag">Mobile</span>
+						<span class="tag">Defold</span>
+						<span class="tag">lua</span>
+					</span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="project-tile">
+			<img src="tiles/lvl13.png" title="Level 13" class="project-tile-img" />
+			<div class="project-summary" data-modal-id="modal-lvl13">
+				<div class="project-summary-container">
+					<span class="name">Level 13</span>
+					<span class="desc-short">A browser incremental with an apocalyptic sci-fi setting.</span>
+					<span class="tags">
+						<span class="tag">Personal</span>
+						<span class="tag">Web</span>
+						<span class="tag">js</span>
+					</span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="project-tile">
+			<img src="tiles/alittlelost.png" title="A Little Lost" class="project-tile-img" />
+			<div class="project-summary"data-modal-id="modal-all">
+				<div class="project-summary-container">
+					<span class="name">A Little Lost</span>
+					<span class="desc-short">A cute match-3 puzzle game.</span>
+					<span class="tags">
+						<span class="tag">Goodgame Studios</span>
+						<span class="tag">Web</span>
+						<span class="tag">Mobile</span>
+						<span class="tag">Flash</span>
+						<span class="tag">Unity</span>
+						<span class="tag">C#</span>
+					<span class="tags">
+				</div>
+			</div>
+		</div>
+		
+		<div class="project-tile">
+			<img src="tiles/shadowkings.png" title="Shadow Kings" class="project-tile-img" />
+			<div class="project-summary"data-modal-id="modal-sk">
+				<div class="project-summary-container">
+					<span class="name">Shadow Kings</span>
+					<span class="desc-short">A base-building multiplayer game.</span>
+					<span class="tags">
+						<span class="tag">Goodgame Studios</span>
+						<span class="tag">Web</span>
+						<span class="tag ">Mobile</span>
+						<span class="tag">Flash</span>
+					</span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="project-tile">
+			<img src="tiles/circleinvaders.png" title="Circle Invaders" class="project-tile-img" />
+			<div class="project-summary" data-modal-id="modal-invaders">
+				<div class="project-summary-container" s>
+					<span class="name">Circle Invaders</span>
+					<span class="desc-short">A twist on the classic Invaders concept.</span>
+					<span class="tags">
+						<span class="tag">Personal</span>
+						<span class="tag">PC</span>
+						<span class="tag">Unity</span>
+						<span class="tag">C#</span>
+					</span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="project-tile">
+			<img src="tiles/palikkapeli.png" title="Palikkapeli" class="project-tile-img" />
+			<div class="project-summary" data-modal-id="modal-palikka">
+				<div class="project-summary-container">
+					<span class="name">Palikkapeli</span>
+					<span class="desc-short">A cooporative/competetive game prototype for a multi-touch table.</span>
+					<span class="tags">
+						<span class="tag">University</span>
+						<span class="tag">Touch table</span>
+						<span class="tag">Processing</span>
+						<span class="tag">Java</span>
+					<span class="tags">
+				</div>
+			</div>
+		</div>
+		
+		<div class="project-tile">
+			<img src="tiles/lentorottapeli.png" title="Screenshot" class="project-tile-img" />
+			<div class="project-summary"data-modal-id="modal-lentorotta">
+				<div class="project-summary-container">
+					<span class="name">Lentorottapeli</span>
+					<span class="desc-short">A 2D side-scroller adventure.</span>
+					<span class="tags">
+						<span class="tag">University</span>
+						<span class="tag">PC</span>
+						<span class="tag">Java</span>
+					<span class="tags">
+				</div>
+			</div>
+		</div>
+	
+	</div>
 </section>
 
-<section id="examples-personal" class="topic">
-    <h2>Personal Projects</h2>
-    <div class="project">
-        <img src="portfolioimg/lvl13.png" title="Screenshot" />
-        <h3>Game development: Level 13 (2015-)</h3>
-        <p class="project-short">Ongoing personal project to build a text-based incremental resource management game in js.</p>
-        <p class="project-long">The game is built using the <a href="https://github.com/brejep/ash-js">Ash.js</a> entity framework for JavaScript and inspired by <a href="http://adarkroom.doublespeakgames.com/">A Dark Room</a> and a few other incremental games. Currently it's playable, but incomplete, unbalanced, and buggy.</p>
-        <ul class="project-links">
-            <li><a href="https://nroutasuo.github.io/level13">alpha version</a> (unstable)</li>
-            <li><a href="https://github.com/nroutasuo/level13">source</a> @Github</li>
-        </ul>
-    </div>
-    
-    <div class="project">
-        <img src="portfolioimg/lastfmvis.png" title="Screenshot" />
-        <h3>Information visualization: Last.fm Tools (2016-)</h3>
-        <p class="project-short">A collection of little tools / visualizations based on a user's <a href="https://last.fm">Last.fm</a> music listening data.</p>
-        <p class="project-long">Built using <a href="https://d3js.org/">D3.js</a> and the <a href="https://www.last.fm/api">Last.fm API</a>.</p>
-        <ul class="project-links">
-            <li><a href="https://nroutasuo.github.io/lastfm-vis">link</a></li>
-            <li><a href="https://github.com/nroutasuo/lastfm-vis">source</a> @Github</li>
-        </ul>
-    </div>
-    
-    <div class="project">
-        <img src="portfolioimg/circleinvaders.png" title="Screenshot" />
-        <h3>Game development: Circle Invaders (2016)</h3>
-        <p class="project-short">A Unity clone of the classic Space Invaders game with a twist: instead of staying in the bottom of the screen, the player is moving on a circle and the invaders are approaching from every direction.</p>
-        <p class="project-long">The game is built using Unity2D (C#).</p>
-        <ul class="project-links">
-            <li><a href="https://github.com/nroutasuo/circleinvaders">source</a> @Github</li>
-        </ul>
-    </div>
-    
-    <!--
-    <div class="project">
-        <img src="portfolioimg/visthesis.png" title="Visualization screenshot" />
-        <h3>Last.fm Album Finder (2013)</h3>
-        <p class="project-short">A little AJAX app for finding all the albums you've by your top artists, and highlighting ones you haven't listened to, using Last.fm API and D3.js.</p>
-        <p class="project-long">I've never been the type to follow my favourite bands' every new release. I might notice my favourite band has a new album when it's already two years old. To find these, and also rarer and older releases I've missed, and to play around with D3js, I decided to build a simple app.</p>
-        <ul class="project-links">
-            <li><a href="nroutasuo.github.com">link to app</a></li>
-        </ul>
-    </div>
-    -->
-</section>
-
-<section id="examples-old" class="topic">
-    <h2>University Projects</h2>
-
-    <div class="project">
-        <img src="portfolioimg/aaltonwvis.png" title="Example visualization" />
-        <h3>Information visualization: Master's Thesis (2013)</h3>
-        <p class="project-short">Master's thesis examining the theoretical and practical process of exploratory information visualization, and the development of two special-purpose visualizations.</p>
-        <p class="project-long">The thesis is titled "Exploratory Visualization of Inter-Organizational Networks." The project included research into the process of exploratory visualization as well as the iterative development of two highly specialized visualizations for Aalto University's Institutional Relationships unit. The visualizations were built with <a href="http://processing.org">Processing</a>. User interviews were central to the development of the visualizations to ensure they are genuinely relevant to end users.</p>
-        <ul class="project-links">
-            <li><a href="materials/mscthesis.pdf">thesis</a> (pdf)</li>
-        </ul>
-    </div>
-    
-    <div class="project">
-        <img src="portfolioimg/palikkapeli.png" title="Cooperative block building" />
-        <h3>Interaction design: Block game (2012)</h3>
-        <p class="project-short">Multitouch / gestural interaction project on the course Experimental User Interfaces with Kenta Kusumoto and Antti Seppä.</p>
-        <p class="project-long">The result is a cooperative team game of creating simple shapes and "throwing" them to the opposing team's side. For most shapes, creation requires more than two hands. The game is built with <a href="http://processing.org">Processing</a> and the <a href="http://www.tuio.org/">TUIO</a> framework for multitouch devices.</p>
-        <ul class="project-links">
-            <li><a href="http://www.youtube.com/watch?v=Fpil-whWDTQ">video</a></li>
-        </ul>
-    </div>
-    
-    <div class="project">
-        <img src="portfolioimg/squash.png" title="3D squash" />
-        <h3>Interaction design: 3D Pong (2012)</h3>
-        <p class="project-short">Computer vision project on the course Experimental User Interfaces with Pyry Kröger and Ville Hakola.</p>
-        <p class="project-long">The squash-like game uses Kinect to recognize players without any additional equipment, so it can played using barehands to control the "rackets". The game is built with <a href="http://processing.org">Processing</a> and a few frameworks (<a href="https://code.google.com/p/simple-openni/">Simple OpenNI</a>) for recognizing the players.</p>
-        <ul class="project-links">
-            <li><a href="http://dl.dropbox.com/u/328788/3dpong.mp4">video</a></li>
-            <li><a href="https://github.com/pyryk/3dpong">source</a> @Github</li>
-        </ul>
-    </div>
-    
-    <!--
-    <div class="project">
-        <img src="portfolioimg/silta.png" />
-        <h3>Service design: Silta (2012)</h3>
-        <p>Aalto Service Camp project with Özlem Gürsel, Liang Yao and Arttu Aho to rethink charity and develop a way to bring donators closer to the issues they care about. 
-        <ul class="project-links">
-            <li><a href="http://slightlyannoyedbirds.wordpress.com">blog</a></li>
-        </ul>
-    </div>
-    -->
-    
-    <div class="project">
-        <img src="portfolioimg/modeling_unit.png" />
-        <h3>Language modeling: Bachelor's Thesis (2011)</h3>
-        <p>Bachelor's Thesis examining the choice of the modeling unit (such as character, word, or a whole phrase) in statistical language models across different natural languages.</p>      
-        <ul class="project-links">
-            <li><a href="materials/bcthesis.pdf">thesis</a> (pdf) (in Finnish)</li>
-        </ul>
-    </div>
-    
-    <div class="project">
-        <img src="portfolioimg/hyponym.png" title="Word pairs generated from Wikipedia" />
-        <h3>Language modeling: Hyponym classifier (2010-2011)</h3>
-        <p>Simple pattern-based <a href="http://en.wikipedia.org/wiki/Hyponymy">hyponym</a> classifier I developed at the <a href="http://www.cl.ecei.tohoku.ac.jp/">Communications Science Lab</a> at <a href="http://www.tohoku.ac.jp/english/">Tohoku University</a> during my exchange there in 2010-2011.</p>
-        <ul class="project-links">
-            <li><a href="https://dl.dropboxusercontent.com/u/4294144/portfolio/materials/JYPEabstract2.pdf">abstract</a> (pdf)</li>
-        </ul>
-    </div>
-    
-    <!--
-    <div class="project primary">
-        <img src="portfolioimg/murhapiiri.png" title="Calendar view in the game prototype" />
-        <h3>Game design: Murderbook (2010)</h3>
-        <p class="project-short">Murderbook was a detective-story inspired attempt by myself, Mikael Matveinen, Rauno Järvinen, Marko Tyrväinen and Anton Zvonkov to create a genuinely social game utilising a social media platform.</p>
-        <p class="project-long">The game was an ambitious project for the scope of the Multimedia Project course, and only a raw prototype was finished. My main role was development of the Flash-based client.</p>
-        <ul class="project-links">
-            <li><a href="http://code.google.com/p/murhapiiri/">source</a> @Google Code</li>
-            <li><a href="materials/murhapiiri-pelisuunnitelma.pdf">game design document</a> (pdf) (in Finnish)</li>
-        </ul>
-    </div>
-    -->
-    
-	<!--
-    <div class="project">
-        <img src="portfolioimg/blog.png" title="Maple leaves" />
-        <h3>Blog: Japan exchange year (2010-2011)</h2>
-        <p>Impressions on my exchange year in Tohoku University, Sendai, Japan, in 2010-2011.</p>   
-        <ul class="project-links">
-            <li><a href="http://planet783.wordpress.com">blog</a> @Wordpress</li>
-        </ul>
-    </div>
-	-->
-    
-    <!--
-    <div class="project>
-        <img src="portfolioimg/lentorottapeli.png" title="Game screenshot" />
-        <h3>Game design: Lentorottapeli (2007)</h2>
-        <p>The first game - and first anything - I ever programmed from scratch myself. A short but challenging little Java adventure.</p>    
-    </div>
-    -->
+<section id="projects-other" class="content content-projects">
+	<h2>Other Projects</h2>
+	<div class="project-container">
+		<div class="project-tile">
+			<img src="tiles/placie.png" title="Placie" class="project-tile-img" />
+			<div class="project-summary" data-modal-id="modal-placie">
+				<div class="project-summary-container">
+					<span class="name">Placie</span>
+					<span class="desc-short">A location-based gamified social app.</span>
+						<span class="tags">
+						<span class="tag">Bublar</span>
+						<span class="tag">Mobile</span>
+						<span class="tag">Unity</span>
+					</span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="project-tile">
+			<img src="tiles/lastfmvis.png" title="Screenshot" class="project-tile-img" />
+			<div class="project-summary" data-modal-id="modal-lastfm">
+				<div class="project-summary-container">
+					<span class="name">Last.fm visualizations</span>
+					<span class="desc-short">Visualizations of Last.fm user listening data.</span>
+						<span class="tags">
+						<span class="tag">Personal</span>
+						<span class="tag">Web</span>
+						<span class="tag">D3.js</span>
+						<span class="tag">js</span>
+					</span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="project-tile">
+			<img src="tiles/aaltonwvis.png" title="Screenshot" class="project-tile-img" />
+			<div class="project-summary" data-modal-id="modal-masters">
+				<div class="project-summary-container">
+					<span class="name">Master's thesis</span>
+					<span class="desc-short">Thesis on the process of exploratory information visualization.</span>
+						<span class="tags">
+						<span class="tag">University</span>
+						<span class="tag">Research</span>
+						<span class="tag">R</span>
+						<span class="tag">Processing</span>
+					</span>
+				</div>
+			</div>
+		</div>
+		
+	</div>
 </section>
 
 </div><!-- maincontainer -->
 
-<script src="jquery-1.9.1.min.js"></script>
-<script src="portfolio.js" ></script>
+<div id="modal-ggg" class="modal-window" data-project-name="Go Go Grenade">
+    <div class="modal-content">
+        <div class="project-details">
+			<div class="carousel-container">
+				<div>
+					<img src="materials/gogogrenade/1.png"/>
+				</div>
+				<div>
+					<img src="materials/gogogrenade/2.jpg"/>
+				</div>
+				<div>
+					<img src="materials/gogogrenade/3.jpg"/>
+				</div>
+				<div>
+					<img src="materials/gogogrenade/4.jpg"/>
+				</div>
+				<div>
+					<img src="materials/gogogrenade/5.jpg"/>
+				</div>
+				<div>
+					<video height="300" controls>
+						<source src="materials/gogogrenade/video1.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+				</div>				
+				<div>
+					<video height="300" controls>
+						<source src="materials/gogogrenade/video2.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+				</div>
+			</div>
+			<div class="project-details-text">
+				<h3>Go Go Grenade</h3>
+				<span class="tags">
+					<span class="tag">Strange Quest</span>
+					<span class="tag">Mobile</span>
+					<span class="tag">Unity</span>
+					<span class="tag">C#</span>
+				</span>
+				<div class="project-attributes">
+					<p><span class="attribute-label">Company:</span> <a href="https://www.strangequest.com">Strange Quest</a></p>
+					<p><span class="attribute-label">Released:</span> June 2019 (Early Access)</p>
+					<p><span class="attribute-label">Platforms:</span> Android</p>
+					<p><span class="attribute-label">Team size:</span> &lt;10</p>
+					<p><span class="attribute-label">Role:</span> Developer</p>
+				</div>
+				<p class="project-short">A social idle game where you throw grenades (and bunnies, and astronauts, and other things) to other players across the world. Built in Unity.  Since the team was small I was involved in almost every part of the game's development including UI system, 3D scene setup and player account setup.</p>
+				<ul class="project-links">
+					<li><a href="https://play.google.com/store/apps/details?id=com.strangequest.gogogrenade">download</a> @Google Play</li>
+				</ul>
+			</div>
+        </div>
+    </div>
+</div>
 
+<div id="modal-blastlands" class="modal-window" data-project-name="Blastlands">
+	<div class="modal-content">
+		<div class="project-details">
+			<div class="carousel-container">
+				<div class="carousel-item">
+					<img src="materials/blastlands/1.png"/>
+				</div>
+				<div class="carousel-item">
+					<img src="materials/blastlands/sc_1.png"/>
+				</div>				
+				<div class="carousel-item">
+					<img src="materials/blastlands/sc_2.png"/>
+				</div>				
+				<div class="carousel-item">
+					<img src="materials/blastlands/sc_3.png"/>
+				</div>				
+				<div class="carousel-item">
+					<img src="materials/blastlands/sc_4.png"/>
+				</div>	
+				<div class="carousel-item">
+					<img src="materials/blastlands/sc_5.png"/>
+				</div>
+				<div class="carousel-item">
+					<video height="300" controls>
+						<source src="materials/blastlands/video1.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
+				</div>
+			</div>	
+			<div class="project-details-text">
+				<h3>Blastlands</h3>
+				<span class="tags">
+					<span class="tag">Strange Quest</span>
+					<span class="tag">Mobile</span>
+					<span class="tag">Defold</span>
+					<span class="tag">lua</span>
+				</span>
+				<div class="project-attributes">
+					<p><span class="attribute-label">Company:</span> <a href="https://www.strangequest.com">Strange Quest</a></p>
+					<p><span class="attribute-label">Released:</span> June 2018 (Early Access)</p>
+					<p><span class="attribute-label">Platforms:</span> Android, iOS</p>
+					<p><span class="attribute-label">Team size:</span> &lt;10</p>
+					<p><span class="attribute-label">Role:</span> Developer</p>
+				</div>
+				<p class="project-short">Multiplayer shooting game released for Android Early Access in July 2018 and iOS soft launch in selected countries in February 2019. Built on the <a href="https://www.defold.com/">Defold</a> engine. Since the team was small I was involved in almost every part of the game's development including server game logic, UI, visual effects and the tutorial.</p>
+				<ul class="project-links">
+					<li><a href="http://blastlands.com">home page</a></li>
+					<li><a href="https://play.google.com/store/apps/details?id=com.strangequest.blastlands">download</a> @Google Play</li>
+					<li><a href="https://itunes.apple.com/se/app/blastlands-team-combat/id1443751542">download</a> @App Store</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="modal-lvl13" class="modal-window" data-project-name="Level 13">
+    <div class="modal-content">
+        <div class="project-details">
+			<div class="carousel-container">
+				<div class="carousel-item">
+					<img src="materials/level13/1.PNG"/>
+				</div>                    
+				<div class="carousel-item">
+					<img src="materials/level13/2.PNG"/>
+				</div>              
+				<div class="carousel-item">
+					<img src="materials/level13/3.PNG"/>
+				</div>
+				<div class="carousel-item">
+					<img src="materials/level13/4.PNG"/>
+				</div>
+				<div class="carousel-item">
+					<img src="materials/level13/5.PNG"/>
+				</div>
+			</div>
+			<div class="project-details-text">
+				<h3>Level 13</h3>
+				<span class="tags">
+					<span class="tag">Personal</span>
+					<span class="tag">Web</span>
+					<span class="tag">js</span>
+				</span>
+				<div class="project-attributes">
+					<p><span class="attribute-label">Developed:</span> 2015-(ongoing)</p>
+					<p><span class="attribute-label">Platforms:</span> Web</p>
+					<p><span class="attribute-label">Team size:</span> 1</p>
+					<p><span class="attribute-label">Role:</span> Designer & Developer</p>
+				</div>
+				<p class="project-short">A text-based incremental browser game in the vein of <a href="http://adarkroom.doublespeakgames.com/">A Dark Room</a> and <a href="https://candybox2.github.io/candybox/">Candy Box</a>. Set in a post-apocalyptic sci-fi world, in a massive multi-level abandoned city. Features randomly generated maps, exploration, resource management, base-building, item crafting and research. The game is built using <a href="https://github.com/BrettJephson/ash-js">Ash.js</a>, an entity-component framework for JavaScript.</p>
+				<ul class="project-links">
+					<li><a href="https://nroutasuo.github.io/level13/">play</a> (alpha)</li>
+					<li><a href="https://github.com/nroutasuo/level13">code</a> @Github</li>
+					<li><a href="https://www.reddit.com/r/level13/">community</a> @Reddit</li>
+				</ul>
+			</div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-all" class="modal-window" data-project-name="A Little Lost">
+    <div class="modal-content">
+        <div class="project-details">
+			<div class="carousel-container">
+				<div class="carousel-item">
+					<img src="materials/alittlelost/1.jpg"/>
+				</div>                    
+				<div class="carousel-item">
+					<img src="materials/alittlelost/2.png"/>
+				</div>              
+				<div class="carousel-item">
+					<img src="materials/alittlelost/3.png"/>
+				</div>
+				<div class="carousel-item">
+					<img src="materials/alittlelost/4.png"/>
+				</div>
+				<div class="carousel-item">
+					<img src="materials/alittlelost/5.png"/>
+				</div>
+				<div class="carousel-item">
+					<img src="materials/alittlelost/6.png"/>
+				</div>
+			</div>
+			<div class="project-details-text">
+				<h3>A Little Lost</h3>
+				<span class="tags">
+					<span class="tag">Goodgame Studios</span>
+					<span class="tag">Web</span>
+					<span class="tag">Mobile</span>
+					<span class="tag">Flash</span>
+					<span class="tag">Unity</span>
+					<span class="tag">C#</span>
+				</span>
+				<div class="project-attributes">
+					<p><span class="attribute-label">Company:</span> <a href="https://www.goodgamestudios.com/">Goodgame Studios</a></p>
+					<p><span class="attribute-label">Released:</span> August 2016</p>
+					<p><span class="attribute-label">Platforms:</span> Web, Android, iOS</p>
+					<p><span class="attribute-label">Team size:</span> ~30</p>
+					<p><span class="attribute-label">Role:</span> Client Developer</p>
+				</div>
+				<p class="project-short">A match-3 puzzle game with collectible friends ("Littles") who help the player completing the puzzle levels. Developed by two parallel teams for web (Flash) and mobile (Unity). I started in the web team but also helped out in the mobile team. I built much of the game's UI, the level map, and a system for multi-board levels.</p>
+				<ul class="project-links">
+					<li><a href="https://www.youtube.com/watch?v=t-Kab1yZ5LM">trailer</a> @Youtube</li>
+					<li><a href="https://www.youtube.com/playlist?list=PLi0SajuAcfwTd3UuAhxxz_7LD93OgBaFw">gameplay videos</a> @Youtube</li>
+				</ul>
+			</div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-sk" class="modal-window" data-project-name="Shadow Kings">
+    <div class="modal-content">
+        <div class="project-details">
+			<div class="carousel-container">
+				<div class="carousel-item">
+					<img src="materials/shadowkings/1.gif"/>
+				</div>                    
+				<div class="carousel-item">
+					<img src="materials/shadowkings/2.png"/>
+				</div>              
+				<div class="carousel-item">
+					<img src="materials/shadowkings/3.png"/>
+				</div>
+				<div class="carousel-item">
+					<img src="materials/shadowkings/4.png"/>
+				</div>
+				<div class="carousel-item">
+					<img src="materials/shadowkings/5.png"/>
+				</div>
+				<div class="carousel-item">
+					<img src="materials/shadowkings/6.png"/>
+				</div>
+				<div class="carousel-item">
+					<img src="materials/shadowkings/7.png"/>
+				</div>
+			</div>
+			<div class="project-details-text">
+				<h3>Shadow Kings</h3>
+				<span class="tags">
+					<span class="tag">Goodgame Studios</span>
+					<span class="tag">Web</span>
+					<span class="tag">Mobile</span>
+					<span class="tag">Flash</span>
+				</span>
+				<div class="project-attributes">
+					<p><span class="attribute-label">Company:</span> <a href="https://www.goodgamestudios.com/">Goodgame Studios</a></p>
+					<p><span class="attribute-label">Released:</span> August 2014</p>
+					<p><span class="attribute-label">Platforms:</span> Web, Android, iOS</p>
+					<p><span class="attribute-label">Team size:</span> ~50</p>
+					<p><span class="attribute-label">Role:</span> Client Developer</p>
+				</div>
+				<p class="project-short">A free-to-play MMO game where the player can build a base, attack other players or NPCs, set up defences, and form alliances. Shadow Kings aimed to be a more casual successor to the extremely popular <a href="https://www.goodgamestudios.com/games/goodgame-empire/">Goodgame Empire</a>. My contributions to the game include much of the UI animations system, the tutorial and the attack and defence screens.</p>
+				<ul class="project-links">
+					<li><a href="https://www.youtube.com/watch?v=XIt74o3SMbk">gameplay video</a> @Youtube</li>
+				</ul>
+			</div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-invaders" class="modal-window" data-project-name="Circle Invaders">
+    <div class="modal-content">
+        <div class="project-details">
+			<div class="carousel-container">
+				<div class="carousel-item">
+					<img src="materials/circleinvaders/1.png"/>
+				</div>                    
+				<div class="carousel-item">
+					<img src="materials/circleinvaders/2.png"/>
+				</div>              
+				<div class="carousel-item">
+					<img src="materials/circleinvaders/3.png"/>
+				</div>
+				<div class="carousel-item">
+					<img src="materials/circleinvaders/4.png"/>
+				</div>
+			</div>
+			<div class="project-details-text">
+				<h3>Circle Invaders</h3>
+				<span class="tags">
+					<span class="tag">Personal</span>
+					<span class="tag">PC</span>
+					<span class="tag">Unity</span>
+					<span class="tag">C#</span>
+				</span>
+				<div class="project-attributes">
+					<p><span class="attribute-label">Developed:</span> 2016</p>
+					<p><span class="attribute-label">Platforms:</span> PC</p>
+					<p><span class="attribute-label">Team size:</span> 1</p>
+					<p><span class="attribute-label">Role:</span> Designer & Developer</p>
+				</div>
+				<p class="project-short">A Unity clone of the classic Space Invaders game with a twist: instead of staying in the bottom of the screen, the player is moving on a circle and the invaders are approaching from every direction. Built using Unity as a prototype to explore a more Unity-oriented game architecture.</p>
+				<ul class="project-links">
+					<li><a href="https://github.com/nroutasuo/circleinvaders">source</a> @Github</li>
+				</ul>
+			</div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-palikka" class="modal-window" data-project-name="Palikkapeli">
+    <div class="modal-content">
+        <div class="project-details">
+			<div class="carousel-container">
+				<div class="carousel-item">
+					<img src="materials/palikkapeli/1.png"/>
+				</div>
+				<div class="carousel-item">
+					<img src="materials/palikkapeli/2.png"/>
+				</div>
+				<div class="carousel-item">
+					<img src="materials/palikkapeli/3.png"/>
+				</div>
+			</div>
+			<div class="project-details-text">
+				<h3>Palikkapeli (Block Game)</h3>
+				<span class="tags">
+					<span class="tag">University</span>
+					<span class="tag">Touch Table</span>
+					<span class="tag">Processing</span>
+					<span class="tag">Java</span>
+				</span>
+				<div class="project-attributes">
+					<p><span class="attribute-label">Developed:</span> 2012</p>
+					<p><span class="attribute-label">Platforms:</span> Multi-touch table</p>
+					<p><span class="attribute-label">Team size:</span> 3</p>
+					<p><span class="attribute-label">Role:</span> Designer & Developer</p>
+				</div>
+				<p class="project-short">An Experimental User Interfaces course project made together with Kenta Kusumoto and Antti Seppä. Our goal was to create a game that is both cooperative and competetive. Two teams compete by creating simple shapes and "throwing" them to the opposing team's side. The catch is that to create these shapes, often more then two hands are needed. The game is built with <a href="https://processing.org/">Processing</a>.</p>
+				<ul class="project-links">
+					<li><a href="http://www.youtube.com/watch?v=Fpil-whWDTQ">gameplay video</a> @ Youtube</li>
+				</ul>
+			</div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-lentorotta" class="modal-window" data-project-name="Lentorottapeli">
+    <div class="modal-content">
+        <div class="project-details">
+			<div class="carousel-container">
+				<div class="carousel-item">
+					<img src="materials/lentorottapeli/1.png"/>
+				</div>
+				<div class="carousel-item">
+					<img src="materials/lentorottapeli/2.png"/>
+				</div>
+				<div class="carousel-item">
+					<img src="materials/lentorottapeli/3.png"/>
+				</div>
+				<div class="carousel-item">
+					<img src="materials/lentorottapeli/4.png"/>
+				</div>
+				<div class="carousel-item">
+					<img src="materials/lentorottapeli/5.png"/>
+				</div>
+				<div class="carousel-item">
+					<img src="materials/lentorottapeli/6.png"/>
+				</div>
+			</div>
+			<div class="project-details-text">
+				<h3>Lentorottapeli (Flying Rat Game)</h3>
+				<span class="tags">
+					<span class="tag">University</span>
+					<span class="tag">PC</span>
+					<span class="tag">Java</span>
+				</span>
+				<div class="project-attributes">
+					<p><span class="attribute-label">Developed:</span> 2007</p>
+					<p><span class="attribute-label">Platforms:</span> PC</p>
+					<p><span class="attribute-label">Team size:</span> 1</p>
+					<p><span class="attribute-label">Role:</span> Designer & Developer</p>
+				</div>
+				<p>A university course project. A Flappy Bird-style side-scrolling flying game where the aim is to manage to fly from one location to another while avoiding obstacles and fights and collecting power-ups and coins. The resting points contain scripted events and the fighting system is inspired by classic Japanese RPGs.</p>
+				<ul class="project-links">
+					<li><a href="materials/lentorottapeli/peli.jar">executable</a> (jar) (in Finnish)</li>
+				</ul>
+			</div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-placie" class="modal-window" data-project-name="Placie">
+    <div class="modal-content">
+        <div class="project-details">
+			<div class="carousel-container">
+				<div class="carousel-item">
+					<img src="materials/placie/1.jpg"/>
+				</div>
+				<div class="carousel-item">
+					<img src="materials/placie/2.jpg"/>
+				</div>
+				<div class="carousel-item">
+					<img src="materials/placie/3.png"/>
+				</div>
+				<div class="carousel-item">
+					<img src="materials/placie/4.jpg"/>
+				</div>
+				<div class="carousel-item">
+					<img src="materials/placie/5.jpg"/>
+				</div>
+			</div>
+			<div class="project-details-text">
+				<h3>Placie</h3>
+				<span class="tags">
+					<span class="tag">Bublar</span>
+					<span class="tag">Mobile</span>
+					<span class="tag">Unity</span>
+				</span>
+				<div class="project-attributes">
+					<p><span class="attribute-label">Company:</span> <a href="https://www.bublar.com/">Bublar</a></p>
+					<p><span class="attribute-label">Released:</span> November 2017</p>
+					<p><span class="attribute-label">Platforms:</span> Android, iOS</p>
+					<p><span class="attribute-label">Team size:</span> < 10</p>
+					<p><span class="attribute-label">Role:</span> Client Developer</p>
+				</div>
+				<p class="project-short">A location-based AR social that lets users decorate and post pictures ("placies") in their location and view them in AR mode.</p>
+				<p>The project started as a location-based AR game but shifted towards a gamified social app based on test user feedback. As the team was small everyone was involved in all aspects of the project, but I worked especially on the image decoration tools, AR mode, tutorial and various user interface components.</p>
+				<ul class="project-links">
+					<li><a href="https://www.youtube.com/watch?v=5xPbueNJ03o">promotional video</a> @Youtube</li>
+				</ul>
+			</div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-lastfm" class="modal-window" data-project-name="Last.fm Visualizations">
+    <div class="modal-content">
+        <div class="project-details">
+			<div class="carousel-container">
+				<div class="carousel-item">
+					<img src="materials/lastfmvis/1.png"/>
+				</div>
+				<div class="carousel-item">
+					<img src="materials/lastfmvis/2.png"/>
+				</div>
+				<div class="carousel-item">
+					<img src="materials/lastfmvis/3.png"/>
+				</div>
+			</div>
+			<div class="project-details-text">
+				<h3>Last.fm Visualizations</h3>
+				<span class="tags">
+					<span class="tag">Personal</span>
+					<span class="tag">Web</span>
+					<span class="tag">D3.js</span>
+					<span class="tag">js</span>
+				</span>
+				<div class="project-attributes">
+					<p><span class="attribute-label">Developed:</span> 2016-2018</p>
+					<p><span class="attribute-label">Platforms:</span> Web</p>
+					<p><span class="attribute-label">Team size:</span> 1</p>
+					<p><span class="attribute-label">Role:</span> Designer & Developer</p>
+				</div>
+				<p class="project-short">A collection of interactive visualizations based on a user's <a href="https://last.fm">Last.fm</a> music listening data, including a genre timeline, an artist timeline and a tag cloud. Built using <a href="https://d3js.org/">D3.js</a> and the <a href="https://www.last.fm/api">Last.fm API</a>.
+				<ul class="project-links">
+					<li><a href="https://nroutasuo.github.io/lastfm-vis">link</a></li>
+					<li><a href="https://github.com/nroutasuo/lastfm-vis">source</a> @Github</li>
+				</ul>
+			</div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-masters" class="modal-window" data-project-name="Master's thesis">
+    <div class="modal-content">
+        <div class="project-details">
+			<div class="carousel-container">
+				<div class="carousel-item">
+					<img src="materials/dippa/3.png"/>
+				</div>
+				<div class="carousel-item">
+					<img src="materials/dippa/2.png"/>
+				</div>
+				<div class="carousel-item">
+					<img src="materials/dippa/1.png"/>
+				</div>
+			</div>
+			<div class="project-details-text">
+				<h3>Master's Thesis</h3>
+				<span class="tags">
+					<span class="tag">University</span>
+					<span class="tag">Research</span>
+					<span class="tag">R</span>
+					<span class="tag">Processing</span>
+				</span>
+				<div class="project-attributes">
+					<p><span class="attribute-label">University</span> <a href="https://www.aalto.fi/en">Aalto University</a></p>
+					<p><span class="attribute-label">Completed:</span> 2013</p>
+				</div>
+				<p>Thesis project examining the theoretical and practical process of exploratory information visualization. The project consisted of research into the process of exploratory visualization as well as the iterative development of tailored visualization tools for Aalto University's Institutional Relationships unit.</p>
+				<p>The resulting thesis is titled <span class="article-title">Exploratory Visualization of Inter-Organizational Networks</span>. The visualization tools were built with Processing and additional graphs for the thesis were made in R.</p>
+				<ul class="project-links">
+					<a href="materials/dippa/mscthesis.pdf">thesis</a> (pdf)</li>
+				</ul>
+			</div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-header" class="modal-header" style="display:none;"><h2>Projects</h2></div>
+
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/slick.min.js"></script>
+<script src="js/portfolio.js" ></script>
 
 </body>
 </html>
