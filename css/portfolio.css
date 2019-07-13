@@ -236,7 +236,6 @@ ul ul li:before {
 .modal-content {
 	position: relative;
 	width: 100%;
-	padding-top: 40px;
 }
 
 .modal-content h3 {
@@ -244,16 +243,17 @@ ul ul li:before {
 }
 
 .project-details {
-    padding: 0;
-	width: 650px;
-	max-width: 80%;
-	margin: 0.8em auto 0 auto;
+    padding: 3.2em 6.4em 1.6em 6.4em;
+	margin: 0 auto;
 	position: relative;
+	max-width: 80em;
 }
 
 .project-details-text {
     padding: 1.60em;
 	background: #eaeaea;
+	max-width: 60em;
+	margin: 0 auto;
 }
 
 .animate-fade {
@@ -277,46 +277,48 @@ ul ul li:before {
 }
 
 .modal-control {
-	color: #aaa;
 	display: inline-block;
-	font-size: 32px;
-	font-weight: bold;
-	width: auto !important;
     vertical-align: middle;
 	position: absolute;
+    background: #fffa;
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
 }
 
 .modal-control img {
-	position: absolute;
-	width: 22px;
-	height: 22px;
-	opacity: 0.8;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    opacity: 0.8;
+    top: 7px;
+    left: 7px;
 }
 
 .modal-control:hover,
 .modal-control:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+	cursor: pointer;
+    background: #fff;
 }
 .modal-control:hover img,
 .modal-control:focus img {
 	opacity: 1;
+	transform: scale(1.05);
 }
 
 .modal-close {
-    top: 50px;
-    right: 32px;
+    top: 1.6em;
+    right: 1.6em;
 }
 
 .modal-previous {
-	top: 50%;
-	left: 10px;
+    top: 420px;
+	left: 1.6em;
 }
 
 .modal-next {
-	top: 50%;
-	right: 32px;
+    top: 420px;
+    right: 1.6em;
 }
 
 .project-attributes {
@@ -342,9 +344,10 @@ span.attribute-label {
 /* PROJECT IMAGES CAROUSEL */
 
 .carousel-container {
-	margin-bottom: 30px;
+	margin: 0 auto 25px 0;
 	background: #eee;
 	height: 300px;
+	max-width: 1200px;
 }
 
 .carousel-container div {
@@ -421,24 +424,20 @@ span.attribute-label {
     font-size: 0;
     line-height: 0;
     position: absolute;
-    bottom: 50%;
+    top: 0;
     display: block;
     width: 20px;
-    height: 20px;
+    height: 100%;
     padding: 0;
-    -webkit-transform: translate(0, -50%);
-    -ms-transform: translate(0, -50%);
-    transform: translate(0, -50%);
     cursor: pointer;
     border: none;
     outline: none;
-    background-color: #ffffff99;
+    background-color: #ffffff33;
     background-size: 75% 75%;
     background-position: center;
     background-repeat: no-repeat;
 	z-index: 2;
 	opacity: 0;
-	border-radius: 10px;
 	transition: all 0.2s;
 }
 .carousel-container:hover .slick-prev, .carousel-container:hover .slick-next {
@@ -448,12 +447,12 @@ span.attribute-label {
 .slick-prev
 {
     background-image: url(../icons/icon-left.svg);
-    left: 5px;
+    left: 0;
 }
 .slick-next
 {
     background-image: url(../icons/icon-right.svg);
-    right: 5px;
+    right: 0;
 } 
 
 

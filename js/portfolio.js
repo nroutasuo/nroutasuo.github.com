@@ -41,7 +41,7 @@ function scrollFunction() {
 	
 	if (diff > 300) {
 		var maxOffset = introHeight / 2 + 10;
-		var scrollSpeed = 1.25;
+		var scrollSpeed = 1;
 		var offset = Math.min(Math.max(0, scrollAmount * scrollSpeed), maxOffset);
 		$("#intro").css("margin-top", -offset + "px");
 	} else {
@@ -70,8 +70,8 @@ function initDetails (summary, modal) {
 	summary.click(function() {
 		showDetails(true, modal);
 	});
-	var controlPrevious = $("<div class='modal-previous modal-control'><img src='icons/icon-skip-previous.svg'/></div>");
-	var controlNext = $("<div class='modal-next modal-control'><img src='icons/icon-skip-next.svg'/></div>");
+	var controlPrevious = $("<div class='modal-previous modal-control'><img src='icons/icon-left.svg'/></div>");
+	var controlNext = $("<div class='modal-next modal-control'><img src='icons/icon-right.svg'/></div>");
 	var controlClose = $("<div class='modal-close modal-control'><img src='icons/icon-close.svg'/></div>");
 	
 	controlPrevious.click(function() {
@@ -106,14 +106,12 @@ function showDetails (value, modal) {
 			showDetails(false, previousModal);
 		}
 		modal.toggleClass("animate-fade", !previousModal);
-		$("#modal-header").toggleClass("animate-fade", !previousModal);
 		$('.carousel-container').slick('setPosition');
 		$('.carousel-container').slick('slickGoTo', 0, true);
 		currentModal = modal;
 	} else {
 		currentModal = null;
 	}
-	$("#modal-header").css("display", value ? "block" : "none");
 	$("body").css("overflow", value ? "hidden" : "inherit");
 }
 
