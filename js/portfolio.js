@@ -95,24 +95,66 @@ function initDetails (summary, modal) {
 	modal.append(controlPrevious);
 	modal.append(controlNext);
 	modal.append(controlClose);
+	
+	showDetails(false, modal);
 };
 
 function showDetails (value, modal) {
 	if (!modal) return;
-	modal.css("display", value ? "block" : "none");
+	var previousModal = currentModal;
 	if (value) {
-		var previousModal = currentModal;
+		modal.css("z-index", 11);
+		animateModelIn(modal, null, previousModal != null);
 		if (previousModal) {
 			showDetails(false, previousModal);
 		}
-		modal.toggleClass("animate-fade", !previousModal);
 		$('.carousel-container').slick('setPosition');
 		$('.carousel-container').slick('slickGoTo', 0, true);
 		currentModal = modal;
+		updateScroll();
 	} else {
+		modal.css("z-index", 10);
+		animateModalOut(modal, function () {
+			updateScroll();
+		});
 		currentModal = null;
 	}
-	$("body").css("overflow", value ? "hidden" : "inherit");
+}
+
+function animateModelIn(modal, cb, quick) {
+	console.log("animateIn: " + quick);
+	if (quick) {
+		modal.fadeIn(10, function () {
+			modal.find(".modal-control").fadeIn(10);
+			if (cb) cb();
+		});
+		modal.find(".project-details").animate({
+			top: 0
+		}, 10);
+	} else {
+		modal.fadeIn(300, function () {
+			modal.find(".modal-control").fadeIn(200);
+			if (cb) cb();
+		});
+		modal.find(".project-details").animate({
+			top: 0
+		}, 300);
+	}
+}
+
+function animateModalOut(modal, cb) {
+	modal.find(".modal-control").fadeOut(200);
+	modal.find(".project-details").animate({
+			top: -50
+		}, 100, function () {	
+		modal.fadeOut(200, function () {
+			if (cb) cb();
+		});
+	});
+}
+
+function updateScroll() {
+	$("body").css("overflow-y", currentModal ? "hidden" : "inherit");
 }
 
 $.each($(".project-summary"), function () {

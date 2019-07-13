@@ -9,6 +9,8 @@ body {
     padding: 0px;
     margin: 0px;
     line-height: 1.32em;
+    width: 100vw;
+    overflow-x: hidden;
 }
 
 section {
@@ -234,7 +236,8 @@ ul ul li:before {
 }
 
 .modal-content {
-	position: relative;
+	position: absolute;
+	top: 0;
 	width: 100%;
 }
 
@@ -254,26 +257,6 @@ ul ul li:before {
 	background: #eaeaea;
 	max-width: 60em;
 	margin: 0 auto;
-}
-
-.animate-fade {
-	animation-name: animatefade;
-	animation-duration: 0.35s;
-}
-
-@keyframes animatefade {
-  from {top: 0; opacity: 0}
-  to {top: 0; opacity: 1}
-}
-
-.animate-from-top {
-	animation-name: animate-from-top;
-	animation-duration: 0.3s;
-}
-
-@keyframes animate-from-top {
-  from {top: -50px; opacity: 0}
-  to {top: 0; opacity: 1}
 }
 
 .modal-control {
