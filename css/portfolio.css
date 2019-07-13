@@ -5,7 +5,7 @@ body {
     background: #ffffff;
     color: #111111;
     font-family: Verdana, Geneva, sans-serif;
-    font-size: 13px;
+    font-size: 10pt;
     padding: 0px;
     margin: 0px;
     line-height: 1.32em;
@@ -33,6 +33,7 @@ section.content {
     margin: 0;
     padding: 1.60em;
     background: #f3f3f3;
+    width: 100%;
 }
 
 section.content:last-child {
@@ -480,7 +481,7 @@ ul.project-links li {
 }
 
 .link-icons img {
-	height: 20px;
+	height: 1.6rem;
     vertical-align: middle;
     margin-right: 3px;
 }

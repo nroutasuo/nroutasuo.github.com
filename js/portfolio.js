@@ -28,27 +28,6 @@ function hideAll(elems) {
     elems.addClass("hide");
 }
 
-// FASTER SCROLL PAST INTRO
-
-window.onscroll = function() {scrollFunction()};
-
-function scrollFunction() {
-	var scrollAmount = body.scrollTop || html.scrollTop;
-	var documentHeight = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
-	var viewportHeight = Math.max(html.clientHeight, window.innerHeight || 0);
-	var diff = documentHeight - viewportHeight;
-	var introHeight = $("#intro").outerHeight() || 100;
-	
-	if (diff > 300) {
-		var maxOffset = introHeight / 2 + 10;
-		var scrollSpeed = 1;
-		var offset = Math.min(Math.max(0, scrollAmount * scrollSpeed), maxOffset);
-		$("#intro").css("margin-top", -offset + "px");
-	} else {
-		$("#intro").css("margin-top", 0);
-	}
-}
-
 // PROJECT TILE
 
 $(".project-tile").hover(function () {
