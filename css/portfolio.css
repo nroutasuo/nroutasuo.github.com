@@ -78,10 +78,10 @@ section.content:last-child {
 /* FONTS AND COLOURS */
 
 h1, h2, h3, h4, h5 {
-    color: #45546c;
+    color: #395580;
 }
 
-h1 { font-size: 2em; }
+h1 { font-size: 2.5em; }
 h2 { font-size: 1.5em; }
 h3 { font-size: 1.25em; }
 
@@ -291,18 +291,28 @@ ul ul li:before {
 }
 
 .modal-close {
-    top: 1.6em;
-    right: 1.6em;
+    top: 1.5em;
+    right: 1.5em;
 }
 
 .modal-previous {
-    top: 420px;
-	left: 1.6em;
+    top: 370px;
+	left: 1.5em;
 }
 
 .modal-next {
-    top: 420px;
-    right: 1.6em;
+    top: 370px;
+    right: 1.5em;
+}
+
+.modal-pagenum {
+	top: 4.2em;
+	right: 0.9em;
+	font-weight: bold;
+	position: absolute;
+	width: 48px;
+	display: inline-block;
+	text-align: center;
 }
 
 .project-attributes {
@@ -481,7 +491,7 @@ ul.project-links li {
 }
 
 .link-icons img {
-	height: 1.6rem;
+	height: 1.5rem;
     vertical-align: middle;
     margin-right: 3px;
 }

@@ -78,6 +78,9 @@ function initDetails (summary, modal) {
 	modal.append(controlNext);
 	modal.append(controlClose);
 	
+	var pageNum = $("<span class='modal-pagenum'>" + (i+1) + "/" + $(".project-summary").length + "</span>");
+	modal.append(pageNum);
+	
 	showDetails(false, modal, direction_top);
 };
 
@@ -89,7 +92,7 @@ function showDetails (value, modal, dir) {
 		if (previousModal) {
 			showDetails(false, previousModal, dir);
 		}
-		animateModelIn(modal, null, previousModal != null, dir);
+		animateModalIn(modal, null, previousModal != null, dir);
 		$('.carousel-container').slick('setPosition');
 		$('.carousel-container').slick('slickGoTo', 0, true);
 		currentModal = modal;
@@ -103,7 +106,7 @@ function showDetails (value, modal, dir) {
 	}
 }
 
-function animateModelIn(modal, cb, quick, dir) {
+function animateModalIn(modal, cb, quick, dir) {
 	var project_details = modal.find(".project-details");
 	project_details.css("top", dir == direction_top ? -50 : 0);
 	project_details.css("left", dir == direction_left ? -100 : "unset");
