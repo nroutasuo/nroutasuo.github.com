@@ -11,10 +11,15 @@ body {
     line-height: 1.32em;
     width: 100vw;
     overflow-x: hidden;
+	text-size-adjust: none;
 }
 
 section {
     padding: 1.60em;
+}
+
+p {
+	font-size: 1em;
 }
 
 #intro {
@@ -72,6 +77,12 @@ section.content:last-child {
 	.project-container {
 		width: 516px;
 	}
+}
+
+@media (orientation: portrait) {
+  body {
+	  font-size: 2em;
+  }
 }
 
 
@@ -265,18 +276,18 @@ ul ul li:before {
     vertical-align: middle;
 	position: absolute;
     background: #fffa;
-    width: 32px;
-    height: 32px;
-    border-radius: 16px;
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 1.25em;
 }
 
 .modal-control img {
     position: absolute;
-    width: 18px;
-    height: 18px;
+    width: 1.5em;
+    height: 1.5em;
     opacity: 0.8;
-    top: 7px;
-    left: 7px;
+    top: 0.5em;
+    left: 0.5em;
 }
 
 .modal-control:hover,
@@ -306,11 +317,10 @@ ul ul li:before {
 }
 
 .modal-pagenum {
-	top: 4.2em;
-	right: 0.9em;
-	font-weight: bold;
+	top: 4.5em;
+	right: 0.75em;
 	position: absolute;
-	width: 48px;
+	width: 4em;
 	display: inline-block;
 	text-align: center;
 }
