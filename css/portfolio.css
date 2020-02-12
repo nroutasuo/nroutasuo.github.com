@@ -55,7 +55,7 @@ section.content:last-child {
 	flex-wrap: wrap;
 	justify-content: flex-start;
 	margin: 0 auto;
-	width: 1032px;
+	width: 1290px;
 }
 
 @media all and (max-width: 768px) {
@@ -66,12 +66,20 @@ section.content:last-child {
     }
 }
 
+@media all and (max-width: 1300px) {
+	
+	.project-container {
+		width: 1032px;
+	}
+}
+
 @media all and (max-width: 1132px) {
 	
 	.project-container {
 		width: 774px;
 	}
 }
+
 @media all and (max-width: 874px) {
 	
 	.project-container {
