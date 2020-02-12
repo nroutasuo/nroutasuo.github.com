@@ -143,6 +143,7 @@ ul ul li:before {
 /* PROJECT TILES */
 
 .project-tile {
+	background: #0001;
 	margin: 4px;
 	width: 250px;
 	height: 250px;
@@ -252,9 +253,8 @@ ul ul li:before {
 }
 
 .modal-content {
-	position: absolute;
-	top: 0;
-	width: 100%;
+	margin: 1em auto;
+	max-width: 70em;
 }
 
 .modal-content h3 {
@@ -262,15 +262,13 @@ ul ul li:before {
 }
 
 .project-details {
-    padding: 3.2em 6.4em 1.6em 6.4em;
-	margin: 0 auto;
-	position: relative;
-	max-width: 80em;
+    padding: 5px;
+	margin: 0em 4.5em;
+	background: white;
 }
 
 .project-details-text {
     padding: 1.60em;
-	background: #eaeaea;
 	max-width: 60em;
 	margin: 0 auto;
 }
@@ -283,6 +281,9 @@ ul ul li:before {
     width: 2.5em;
     height: 2.5em;
     border-radius: 1.25em;
+	-webkit-box-shadow: 0px 1px 2px 0px rgba(153,153,153,1);
+	-moz-box-shadow: 0px 1px 2px 0px rgba(153,153,153,1);
+	box-shadow: 0px 1px 2px 0px rgba(153,153,153,1);
 }
 
 .modal-control img {
@@ -306,23 +307,23 @@ ul ul li:before {
 }
 
 .modal-close {
-    top: 1.5em;
-    right: 1.5em;
+    top: 1em;
+    right: 1em;
 }
 
 .modal-previous {
     top: 370px;
-	left: 1.5em;
+	left: 1em;
 }
 
 .modal-next {
     top: 370px;
-    right: 1.5em;
+    right: 1em;
 }
 
 .modal-pagenum {
-	top: 4.5em;
-	right: 0.75em;
+	top: 4em;
+	right: 0.3em;
 	position: absolute;
 	width: 4em;
 	display: inline-block;
@@ -409,7 +410,7 @@ span.attribute-label {
     line-height: 0;
     display: block;
     width: 12px;
-    height: 12px;
+    height: 6px;
     cursor: pointer;
     border: none;
     outline: none;
