@@ -15,35 +15,27 @@ body {
 }
 
 section {
-    padding: 1.60em;
+    padding: 2.4em 1.60em;
 }
 
 p {
 	font-size: 1em;
 }
 
-#intro {
-	max-width: 55em;
+#header, #intro {
+	max-width: 60em;
 	margin: 0 auto;
 	text-align: center;
-	padding: 2.4em 1.6em;
-}
-
-.intro-text, .intro-text p {
-	overflow: hidden;
-	transition: all 0.2s;
 }
 
 section.content {
     margin: 0;
-    padding: 1.60em;
-    background: #f3f3f3;
-    width: 100%;
+    background: #f1f1f1;
 }
 
 section.content:last-child {
     padding-bottom: 3.2em;
-	background: #e9e9e9;
+	background: #e5e5e5;
 }
 
 .content-projects {
@@ -101,10 +93,14 @@ h1, h2, h3, h4, h5 {
 }
 
 h1 { font-size: 2.5em; }
-h2 { font-size: 1.5em; }
+h2 { font-size: 1.6em; }
 h3 { font-size: 1.25em; }
 
-#intro h1, .content-projects h2, .content-projects h3 {
+#intro h1 {
+	margin-top: 0.5em;
+}
+
+.content-projects h2, .content-projects h3 {
 	margin-top: 0;
 }
 
@@ -501,15 +497,15 @@ ul.project-links li {
 }
 
 .link-icons {
-	margin: -0.25em 0 0 0;
+	margin: -0.5em 0 0 0;
 }
 
 .link-icons a {
-    margin-right: 4px;
+    margin: 0px 1px;
 }
 
 .link-icons img {
-	height: 1.5rem;
+	height: 1.25rem;
     vertical-align: middle;
     margin-right: 3px;
 }
