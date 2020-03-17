@@ -363,8 +363,8 @@ span.attribute-label {
 	height: 100%;
     text-align: center;
     overflow: hidden;
-	padding: 0 3px;
-	min-width: 120px;
+	padding: 0;
+	min-width: 150px;
 }
 
 .carousel-container img {
@@ -373,59 +373,59 @@ span.attribute-label {
 }
 
 .slick-slide {
-	opacity: 0.75;
+	opacity: 0.9;
 	transition: opacity 0.2s;
+	background: black;	
+	border: white solid;
+	border-width: 0 2px;
 }
 
 .slick-active {
 	opacity: 1;
 }
 
+.slick-dotted.slick-slider {
+    margin-bottom: 30px;
+}
+
 .slick-dots {
     position: absolute;
-    bottom: -15px;
+    bottom: -24px;
     display: block;
     width: 100%;
     padding: 0;
     margin: 0;
     list-style: none;
     text-align: center;
-	pointer-events: none;
 }
-
 .slick-dots li {
     position: relative;
     display: inline-block;
-    width: 10px;
-    height: 10px;
-    margin: 0 4px;
+    width: 8pt;
+    height: 12pt;
+    margin: 0 5px;
     padding: 0;
     cursor: pointer;
-	pointer-events: all;
 }
-
-.slick-dots li button
-{
+.slick-dots li button {
     font-size: 0;
     line-height: 0;
     display: block;
-    width: 12px;
-    height: 6px;
+    width: 6pt;
+    height: 6pt;
+    padding: 2pt;
     cursor: pointer;
-    border: none;
+    color: transparent;
+    border: 0;
+	border-radius: 4pt;
     outline: none;
-    background: #bbb;
-	border-radius: 8px;
-	overflow: hidden;
+    background: #818181db;
 }
-.slick-dots li button:hover,
-.slick-dots li button:focus
-{
-    outline: none;
-    background: #999;
+.slick-dots li button:hover {
+    background: #81818199;
 }
-.slick-dots li.slick-active button {
-	background: #000;
+.slick-dots li button:focus, .slick-dots .slick-active button {
+    background: #414181db;
 }
 .slick-prev,
 .slick-next
@@ -462,7 +462,7 @@ span.attribute-label {
 {
     background-image: url(../icons/icon-right.svg);
     right: 0;
-} 
+}
 
 
 /* DETAILS */

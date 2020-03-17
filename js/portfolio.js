@@ -163,10 +163,12 @@ $.each($(".project-summary"), function () {
 
 $(document).ready(function(){
   $('.carousel-container').slick({
-		arrows: true,
+		arrows: false,
 		dots: true,
 		variableWidth: true,
 		centerMode: true,
+		swipeToSlide: true,
+		lazyLoad: 'ondemand',
   });
 
 });
