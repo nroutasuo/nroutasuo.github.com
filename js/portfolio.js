@@ -74,12 +74,12 @@ function initDetails (summary, modal) {
 		showDetails(false, $(modal), direction_top);
 	});
 	
-	modal.append(controlPrevious);
-	modal.append(controlNext);
-	modal.append(controlClose);
-	
-	var pageNum = $("<span class='modal-pagenum'>" + (i+1) + "/" + $(".project-summary").length + "</span>");
-	modal.append(pageNum);
+	var header = modal.find(".project-header");
+	var pageNum = $("<div class='modal-pagenum'>" + (i+1) + "/" + $(".project-summary").length + "</div>");
+	header.append(controlPrevious);
+	header.append(pageNum);
+	header.append(controlNext);
+	header.append(controlClose);	
 	
 	showDetails(false, modal, direction_top);
 };
@@ -120,13 +120,11 @@ function animateModalIn(modal, cb, quick, dir) {
 	};
 	if (quick) {
 		modal.fadeIn(50, function () {
-			modal.find(".modal-control").fadeIn(10);
 			if (cb) cb();
-		});
+		})
 		project_details.animate(inner_animation_target, 200);
 	} else {
 		modal.fadeIn(300, function () {
-			modal.find(".modal-control").fadeIn(200);
 			if (cb) cb();
 		});
 		project_details.animate(inner_animation_target, 300);
@@ -139,7 +137,6 @@ function animateModalOut(modal, cb, dir) {
 	if (dir == direction_top) inner_animation_target.top = -50;
 	if (dir == direction_left) inner_animation_target.right = -200;
 	if (dir == direction_right) inner_animation_target.left = -200;
-	modal.find(".modal-control").fadeOut(200);
 	project_details.animate(inner_animation_target, 100, function () {	
 		modal.fadeOut(200, function () {
 			if (cb) cb();

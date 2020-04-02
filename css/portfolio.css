@@ -81,7 +81,7 @@ section.content:last-child {
 
 @media (orientation: portrait) {
   body {
-	  font-size: 2em;
+	  font-size: 1.5em;
   }
 }
 
@@ -102,10 +102,6 @@ h3 { font-size: 1.25em; }
 
 .content-projects h2, .content-projects h3 {
 	margin-top: 0;
-}
-
-.modal-header h2 {
-    margin: 0.5em;
 }
 
 a:link {color:#E34530;}
@@ -241,17 +237,6 @@ ul ul li:before {
 	padding: 0;
 }
 
-.modal-header {
-    background: white;
-    height: 40px;
-    text-align: center;
-	position: fixed;
-	top:0;
-	width: 100%;
-    padding: 0;
-	z-index: 10;
-}
-
 .modal-content {
 	margin: 1em auto;
 	max-width: 70em;
@@ -261,10 +246,20 @@ ul ul li:before {
     margin: 0 0 0.6em 0;
 }
 
+.project-header {
+	margin: 0em 4.5em;
+	height: 1.5em;
+	position: relative;
+	padding-bottom: 2px;
+}
+
 .project-details {
-    padding: 5px;
+    padding: 8px;
 	margin: 0em 4.5em;
 	background: white;
+	-webkit-box-shadow: 0px 1px 3px 0px rgba(153,153,153,1);
+	-moz-box-shadow: 0px 1px 3px 0px rgba(153,153,153,1);
+	box-shadow: 0px 1px 3px 0px rgba(153,153,153,1);
 }
 
 .project-details-text {
@@ -276,23 +271,17 @@ ul ul li:before {
 .modal-control {
 	display: inline-block;
     vertical-align: middle;
-	position: absolute;
     background: #fffa;
-    width: 2.5em;
-    height: 2.5em;
-    border-radius: 1.25em;
-	-webkit-box-shadow: 0px 1px 2px 0px rgba(153,153,153,1);
-	-moz-box-shadow: 0px 1px 2px 0px rgba(153,153,153,1);
-	box-shadow: 0px 1px 2px 0px rgba(153,153,153,1);
+    width: 3em;
+	height: 1.5em;
+	margin: 0 2px;
+    text-align: center;
 }
 
 .modal-control img {
-    position: absolute;
-    width: 1.5em;
-    height: 1.5em;
+	height: 60%;
     opacity: 0.8;
-    top: 0.5em;
-    left: 0.5em;
+    vertical-align: middle;
 }
 
 .modal-control:hover,
@@ -307,27 +296,25 @@ ul ul li:before {
 }
 
 .modal-close {
-    top: 1em;
-    right: 1em;
+    position: absolute;
+	right: 0;
+	clip-path: polygon(11% 0, 89% 0, 100% 100%, 0% 100%);
 }
 
 .modal-previous {
-    top: 370px;
-	left: 1em;
+	clip-path: polygon(11% 0, 100% 0, 100% 100%, 0% 100%);
 }
 
 .modal-next {
-    top: 370px;
-    right: 1em;
+	clip-path: polygon(0% 0, 89% 0, 100% 100%, 0% 100%);;
 }
 
 .modal-pagenum {
-	top: 4em;
-	right: 0.3em;
-	position: absolute;
-	width: 4em;
+	width: 6em;
+	height: 1.5em;
 	display: inline-block;
 	text-align: center;
+	background: white;
 }
 
 .project-attributes {
@@ -403,7 +390,7 @@ span.attribute-label {
     display: inline-block;
     width: 8pt;
     height: 12pt;
-    margin: 0 5px;
+    margin: 0 4px;
     padding: 0;
     cursor: pointer;
 }
