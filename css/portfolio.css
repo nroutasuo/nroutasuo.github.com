@@ -81,7 +81,7 @@ section.content:last-child {
 
 @media (orientation: portrait) {
   body {
-	  font-size: 1.5em;
+	  font-size: 1.75em;
   }
   .modal-control, .project-header, .modal-pagenum {
 	  height: 3em !important;
@@ -245,7 +245,7 @@ ul ul li:before {
 }
 
 .modal-content {
-	margin: 1em auto;
+	margin: 0.6em auto 1.8em auto;
 	max-width: 70em;
 }
 
@@ -270,7 +270,7 @@ ul ul li:before {
 }
 
 .project-details-text {
-    padding: 1.60em;
+    padding: 0.8em 1.60em;
 	max-width: 60em;
 	margin: 0 auto;
 }
@@ -378,10 +378,6 @@ span.attribute-label {
 
 .slick-active {
 	opacity: 1;
-}
-
-.slick-dotted.slick-slider {
-    margin-bottom: 30px;
 }
 
 .slick-dots {
