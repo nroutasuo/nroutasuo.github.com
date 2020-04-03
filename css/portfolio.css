@@ -83,6 +83,13 @@ section.content:last-child {
   body {
 	  font-size: 1.5em;
   }
+  .modal-control, .project-header, .modal-pagenum {
+	  height: 3em !important;
+	  line-height: 3em !important;
+  }
+  .modal-control {
+	  width: 4em !important;
+  }
 }
 
 
@@ -274,7 +281,6 @@ ul ul li:before {
     background: #fffa;
     width: 3em;
 	height: 1.5em;
-	margin: 0 2px;
     text-align: center;
 }
 
@@ -282,6 +288,7 @@ ul ul li:before {
 	height: 60%;
     opacity: 0.8;
     vertical-align: middle;
+    margin: 0.25em auto;
 }
 
 .modal-control:hover,
@@ -312,7 +319,9 @@ ul ul li:before {
 .modal-pagenum {
 	width: 6em;
 	height: 1.5em;
+	line-height: 1.5em;
 	display: inline-block;
+    vertical-align: middle;
 	text-align: center;
 	background: white;
 }
