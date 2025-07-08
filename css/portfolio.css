@@ -18,6 +18,14 @@ section {
     padding: 2.4em 1.60em;
 }
 
+section#header {
+	padding-bottom: 0px
+}
+
+section#intro {
+	padding-top: 0px;
+}
+
 p {
 	font-size: 1em;
 }
@@ -100,7 +108,7 @@ h1, h2, h3, h4, h5 {
 }
 
 h1 { font-size: 2.5em; }
-h2 { font-size: 1.6em; }
+h2 { font-size: 1.8em; }
 h3 { font-size: 1.25em; }
 
 #intro h1 {
@@ -156,6 +164,10 @@ ul ul li:before {
 	cursor: pointer;
 }
 
+.project-tile-hidden {
+	display: none;
+}
+
 .project-tile:hover {
 	border-color: transparent;
 }
@@ -208,9 +220,6 @@ ul ul li:before {
     word-spacing: -2px;
 	font-weight: bold; 
 	font-size: 14px
-}
-
-.years {
 }
 
 .project-tile .tags {
@@ -498,7 +507,7 @@ ul.project-links li {
 }
 
 .link-icons img {
-	height: 1.25rem;
+	height: 1.25em;
     vertical-align: middle;
     margin-right: 3px;
 }

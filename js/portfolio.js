@@ -75,7 +75,8 @@ function initDetails (summary, modal) {
 	});
 	
 	var header = modal.find(".project-header");
-	var pageNum = $("<div class='modal-pagenum'>" + (i+1) + "/" + $(".project-summary").length + "</div>");
+	var tiles = $(".project-tile").not(".project-tile-hidden");
+	var pageNum = $("<div class='modal-pagenum'>" + (i+1) + "/" + tiles.length + "</div>");
 	header.append(controlPrevious);
 	header.append(pageNum);
 	header.append(controlNext);
@@ -152,6 +153,7 @@ $.each($(".project-summary"), function () {
 	var modalID = $(this).attr("data-modal-id");
 	var modal = $("#" + modalID);
 	if (modal.length < 1) return;
+	if ($(this).parent().hasClass("project-tile-hidden")) return;
 	initDetails($(this), modal);
 });
 
